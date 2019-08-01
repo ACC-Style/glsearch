@@ -8,14 +8,14 @@
 			<div id="dateRange" class="absolute:md text_right:md t_n4 r_0 font_0:md font_n1 p_4 c_secondary">
 				<a
 					href
-					class="button bg_primary font_n1 br_radius p-y_3 m-b_3 p-x_4 inline-block c_white undecorated h:bg_secondary h:c_white absolute t_5 r_0 relative:md"
+					class="button bg_primary font_n1 br_radius p-y_3 m-b_3 p-x_4 inline-block c_white undecorated h:bg_secondary h:c_white absolute t_5 t_0:lg r_0 relative:md"
 				>
-					<i class="fas fa-plus m-r_3"></i> Add External Activity
+					<i class="fas fa-plus m-r_3"></i> Add Non ACC Activity
 				</a>
 				<div>
 					Date Range:
-					<input type="date" name id value="2011-09-29" /> -
-					<input type="date" name id value="2019-07-31" />
+					<input type="date" name id v-model="filterStartDate" /> -
+					<input type="date" name id v-model="filterEndDate" />
 					<i class="fa-calendar far font_2 m-l_3 vertical-align_middle"></i>
 				</div>
 			</div>
@@ -50,74 +50,7 @@
 					</li>
 				</ul>
 			</div>
-			<div id="CreditType" class="text_right flex_end flex_auto p-l_5">
-				<span class="uppercase c_secondary font_bold font_n2 m-x_2">
-					Filter Credit Types
-					<i class="fas fa-question-circle"></i>
-				</span>
-				<ul class="flex flex_column flex_row-reverse:md text_left font_bold font_n2 font_ui ul_none">
-					<li class="flex_shrink is-active">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>All</a>
-					</li>
-					<li class="flex_shrink">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_CME a:c_white"
-						>CME</a>
-					</li>
-					<li class="flex_shrink">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_CNE a:c_white"
-						>CNE</a>
-					</li>
-					<li class="flex_shrink">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_COP a:c_white"
-						>COP</a>
-					</li>
-					<li class="flex_shrink">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_ECME a:c_white"
-						>ECME</a>
-					</li>
-					<li class="flex_shrink">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_MOCII a:c_white"
-						>MOCII</a>
-					</li>
-					<li class="flex_shrink">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_MOCIV a:c_white"
-						>MOCIV</a>
-					</li>
-					<li class="flex_shrink">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_CNErx a:c_white"
-						>CNErx</a>
-					</li>
-					<li class="flex_shrink">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_CPE a:c_white"
-						>CPE</a>
-					</li>
-					<li class="flex_shrink">
-						<a
-							href
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_CE a:c_white"
-						>CE</a>
-					</li>
-				</ul>
-			</div>
+			<filterCreditType :creditTypes="creditTypes" :creditsInList="creditsInList"></filterCreditType>
 		</div>
 		<div class="bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
 			<div class="flex bg_secondary-2 font_n2 font_n1:md c_white p_2 p-x_4">
@@ -156,7 +89,7 @@
 									<li
 										class="inline-block br_radius c_white p_1 inline-block m-x_1 p-x_2 p-x_3:md flex_shrink"
 										v-for="(credit, index) in creditsInList"
-										v-bind:key="index"
+										v-bind:key="index+'_credit'"
 										:class="['bg_' + credit]"
 									>
 										<span class="font_bold">{{credit}}</span>
@@ -182,7 +115,7 @@
 				:duration="1000"
 				v-if="transcript"
 			>
-				<transcriptItem v-for="(item, index) in transcript" v-bind:key="index" v-bind="item" />
+				<transcriptItem v-for="(item) in transcript" v-bind:key="item.ID" v-bind="item" />
 			</transition-group>
 		</div>
 		<div
@@ -205,16 +138,27 @@
 </template>
 
 <script>
-import transcriptItem from "./components/transcript-item.vue";
+import transcriptItem from "./components/transcriptItem.vue";
+import filterCreditType from "./components/filterCreditType.vue";
 import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
 	name: "app",
+	data: function() {
+		return {
+			filterStartDate: "1970-01-01",
+			filterEndDate: "",
+			filterCreditType: [],
+			sortType: []
+		};
+	},
+	props: {},
 	components: {
-		transcriptItem
+		transcriptItem,
+		filterCreditType
 	},
 	computed: {
-		...mapState(["transcript"]),
+		...mapState(["transcript", "creditTypes"]),
 		creditsInList: function() {
 			var arr = ["CME"];
 			var list = this.transcript;
