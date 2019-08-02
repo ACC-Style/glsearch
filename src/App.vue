@@ -50,7 +50,11 @@
 					</li>
 				</ul>
 			</div>
-			<filterCreditType :creditTypes="creditTypes" :creditsInList="creditsInList"></filterCreditType>
+			<filterCreditType
+				:creditTypes="creditTypes"
+				:creditsInList="creditsInList"
+				v-on:updatefitler="selectedCreditFilter = $event"
+			></filterCreditType>
 		</div>
 		<div class="bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
 			<div class="flex bg_secondary-2 font_n2 font_n1:md c_white p_2 p-x_4">
@@ -80,15 +84,14 @@
 								<transition-group
 									appear
 									name="creditTypeRollup"
-									enter-active-class="animate fadeInr"
-									appear-active-class="animated fadeInr"
-									leave-active-class="animated fadeOutl"
+									enter-active-class="crossFade"
+									appear-active-class="crossFade-enter"
+									leave-active-class="crossFade-leave"
 									:duration="1000"
-									v-if="creditsInList"
 								>
 									<li
 										class="inline-block br_radius c_white p_1 inline-block m-x_1 p-x_2 p-x_3:md flex_shrink"
-										v-for="(credit, index) in creditsInList"
+										v-for="(credit, index) in creditsFilteredList"
 										v-bind:key="index+'_credit'"
 										:class="['bg_' + credit]"
 									>
@@ -109,13 +112,18 @@
 			<transition-group
 				appear
 				name="search"
-				enter-active-class="animate fadeInr"
-				appear-active-class="animated fadeInr"
-				leave-active-class="animated fadeOutl"
+				enter-active-class="crossFade"
+				appear-active-class="crossFade-enter"
+				leave-active-class="crossFade-leave"
 				:duration="1000"
-				v-if="transcript"
+				v-if="transcriptFiltered"
 			>
-				<transcriptItem v-for="(item) in transcript" v-bind:key="item.ID" v-bind="item" />
+				<transcriptItem
+					v-for="(item) in transcriptFiltered"
+					v-bind:key="item.ID"
+					v-bind="item"
+					:selectedCreditFilter="selectedCreditFilter"
+				/>
 			</transition-group>
 		</div>
 		<div
@@ -148,7 +156,7 @@ export default {
 		return {
 			filterStartDate: "1970-01-01",
 			filterEndDate: "",
-			filterCreditType: [],
+			selectedCreditFilter: ["All"],
 			sortType: []
 		};
 	},
@@ -177,11 +185,53 @@ export default {
 			}
 
 			return arr;
+		},
+		creditsFilteredList: function() {
+			var arr = this.creditsInList,
+				newArr = [];
+			for (let i = 0; i < arr.length; i++) {
+				const element = arr[i];
+				if (
+					this.selectedCreditFilter.indexOf(element) != -1 ||
+					this.selectedCreditFilter.length == 1
+				) {
+					newArr.push(element);
+				}
+			}
+			return newArr;
+		},
+		transcriptFiltered: function() {
+			var tranFiltered = this.transcript,
+				arr = [];
+			this.transcript.forEach(element => {
+				if (this.isTranscriptFilteredOut(element.Credits)) {
+					arr.push(element);
+				}
+			});
+
+			return arr;
 		}
 	},
 	methods: {
 		...mapMutations([]),
-		...mapActions([])
+		...mapActions([]),
+		creditBoolean: function(credit) {
+			var bool =
+				this.selectedCreditFilter.indexOf(credit) != -1 ||
+				this.selectedCreditFilter.length() == 1;
+			return bool;
+		},
+		isTranscriptFilteredOut(credits) {
+			var arr;
+			for (const credit in credits) {
+				if (credits.hasOwnProperty(credit)) {
+					const element = credits[credit];
+					arr.push(element.Type);
+				}
+			}
+
+			return arr.some(r => this.selectedCreditFilter.indexOf(r) >= 0);
+		}
 	}
 };
 </script>
@@ -190,5 +240,45 @@ export default {
 .viewport {
 	min-height: 100vh;
 	overflow-x: hidden;
+}
+/*.slideInRight-enter-active {
+	transition-delay: 0.5s;
+}*/
+.slideInRight-leave-to /* .slideIn-leave-active below version 2.1.8 */ {
+	transform: translateX(-100%);
+	opacity: 0;
+}
+.slideInRight-enter /* .slideIn-leave-active below version 2.1.8 */ {
+	transform: translateX(100%);
+	opacity: 0;
+}
+.slideInRight-enter-to {
+	transform: translateX(1);
+	opacity: 1;
+}
+.slideInRight-move {
+	transition: transform 0.5s ease;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+}
+
+.crossFade-enter-active,
+.crossFade-leave-active {
+	transition: opacity 0.25s ease 0.25s;
+}
+
+.crossFade-leave-to /* .slideIn-leave-active below version 2.1.8 */ {
+	opacity: 0;
+}
+.crossFade-enter /* .slideIn-leave-active below version 2.1.8 */ {
+	opacity: 0;
+}
+.crossFade-enter-to {
+	opacity: 1;
+}
+.crossFade-move {
+	transition: opacity 0.5s ease;
 }
 </style>

@@ -63,10 +63,10 @@
 			<div class="flex_shrink w-grid_3 w-grid_4:md self_end">
 				<ul class="ul_none flex flex_wrap flex_row-reverse:md flex_column font_n1 font_0:md">
 					<li
-						class="br_radius c_white p-y_1 p-x_2 p-y_2:md p-x_3:md block inline-block:md m-x_2 flex_shrink text_center m-b_2"
-						:class="['bg_'+credit.Type]"
 						v-for="(credit, credit_index) in Credits"
 						v-bind:key="credit_index"
+						:class="creditColoring(credit.Type)"
+						class="br_radius c_white p-y_1 p-x_2 p-y_2:md p-x_3:md block inline-block:md m-x_2 flex_shrink text_center m-b_2"
 					>
 						<span>{{credit.Type}}</span>
 						<span class="font_bold m-l_3 p-l_3 br-l_1 br_solid br_white">{{credit.Amount}}</span>
@@ -87,12 +87,24 @@ export default {
 		Activity: { type: String, default: "activity" },
 		DateCompleted: { type: String, default: "0/0/00" },
 		DateClaimed: { type: String, default: "1/1/00" },
-		Credits: { type: Array }
+		Credits: { type: Array },
+		selectedCreditFilter: { type: Array }
 	},
 	data: function() {
 		return {
 			IsActive: false
 		};
+	},
+	methods: {
+		creditColoring: function(type) {
+			var colorCode =
+				this.selectedCreditFilter.indexOf(type) != -1 ||
+				this.selectedCreditFilter.length == 1
+					? "bg_" + type
+					: "bg_secondary-3";
+
+			return colorCode;
+		}
 	}
 };
 </script>
