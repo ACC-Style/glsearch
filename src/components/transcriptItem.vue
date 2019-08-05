@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="h:bg_black-1"
+		class="h:bg_black-1 bg_white"
 		:class="{'is-active':IsActive}"
 		@click="function(){ IsActive = !IsActive }"
 	>
@@ -65,8 +65,8 @@
 					<li
 						v-for="(credit, credit_index) in Credits"
 						v-bind:key="credit_index"
-						:class="creditColoring(credit.Type)"
-						class="br_radius c_white p-y_1 p-x_2 p-y_2:md p-x_3:md block inline-block:md m-x_2 flex_shrink text_center m-b_2"
+						:class="creditDecoration(credit.Type)"
+						class="br_radius p-y_1 p-x_2 p-y_2:md p-x_3:md block inline-block:md m-x_2 flex_shrink text_center m-b_2 transition_2"
 					>
 						<span>{{credit.Type}}</span>
 						<span class="font_bold m-l_3 p-l_3 br-l_1 br_solid br_white">{{credit.Amount}}</span>
@@ -96,14 +96,14 @@ export default {
 		};
 	},
 	methods: {
-		creditColoring: function(type) {
-			var colorCode =
+		creditDecoration: function(type) {
+			var decorationClasses =
 				this.selectedCreditFilter.indexOf(type) != -1 ||
 				this.selectedCreditFilter.length == 1
-					? "bg_" + type
-					: "bg_secondary-3";
+					? "order_0 c_white bg_" + type
+					: "order_last br_secondary-4 bg_secondary-5  c_secondary-3 br_1 br_dashed";
 
-			return colorCode;
+			return decorationClasses;
 		}
 	}
 };

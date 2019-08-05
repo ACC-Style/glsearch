@@ -4,7 +4,10 @@
 			My Transcript
 			<span
 				class="a:_block c_secondary-2 font_n1 inline-block m-b_2 vertical-align_middle w_100"
-			>Total Credits in Transcript: 54</span>
+			>
+				Total Credits in Transcript:
+				<span>{{fullCreditCount}}</span>
+			</span>
 			<div id="dateRange" class="absolute:md text_right:md t_n4 r_0 font_0:md font_n1 p_4 c_secondary">
 				<a
 					href
@@ -13,7 +16,7 @@
 					<i class="fas fa-plus m-r_3"></i> Add Non ACC Activity
 				</a>
 				<div>
-					Date Range:
+					Date Claimed:
 					<input type="date" name id v-model="filterStartDate" /> -
 					<input type="date" name id v-model="filterEndDate" />
 					<i class="fa-calendar far font_2 m-l_3 vertical-align_middle"></i>
@@ -56,72 +59,71 @@
 				v-on:updatefitler="selectedCreditFilter = $event"
 			></filterCreditType>
 		</div>
-		<div class="bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
-			<div class="flex bg_secondary-2 font_n2 font_n1:md c_white p_2 p-x_4">
-				<div class="flex_auto font_bold capitalize">list summary</div>
-				<div class="flex_shrink p-x_4">
-					<span class="capitalize">Date Range:</span>
-					<span class="c_secondary-n3 m-l_3 font_bold">None</span>
-				</div>
-				<div class="flex_shrink p-l_4">
-					<span class="capitalize">Filter:</span>
-					<span class="c_secondary-n3 m-l_3 font_bold">None</span>
+		<div id="summaryView" class="bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
+			<div class="flex bg_secondary-2 font_n2 font_n1:md c_white p_2 p-x_4 font_bold">
+				<div class="flex_auto uppercase">list summary</div>
+				<div class="flex_shrink p-x_4"></div>
+				<div class="flex_shrink p-l_4 uppercase">
+					<span class="c_secondary-n3 m-l_3">
+						<span
+							v-if="(selectedCreditFilter.length > 1 && selectedCreditFilter[1] != 'All' )"
+						>Credit Type</span>
+						<span
+							class="m-x_3"
+							v-if="(selectedCreditFilter.length > 1 && selectedCreditFilter[1] != 'All' ) && (filterStartDate != '1949-01-01' || filterEndDate=='')"
+						>&amp;</span>
+						<span class="c_secondary-n3" v-if="filterStartDate != '1949-01-01' || filterEndDate==''">Date</span>
+					</span>
+					<span class="p-l_3">Filtered by</span>
 				</div>
 			</div>
 			<div class="flex">
 				<div class="flex_auto p-x_4 p-y_3">
-					<ul class="ul_none">
+					<ul class="ul_none lh_3">
 						<li>
 							<ul class="ul_none flex flex_wrap font_n2 font_n1:md">
 								<li class="font_bold flex_shrink m-r_3">
-									Credit Types
-									<span
-										class="c_primary-0 font_n1 h:dotted inline-block m-t_n2 vertical-align_top"
-									>
+									<span class="c_secondary-1 capitalize">Credit Types</span>
+									<span class="c_primary-0 font_n1 h:dotted inline-block m-t_n2 vertical-align_top">
 										<i class="fa-question-circle fas"></i>
 									</span>
 								</li>
-								<transition-group
-									appear
-									name="creditTypeRollup"
-									enter-active-class="crossFade"
-									appear-active-class="crossFade-enter"
-									leave-active-class="crossFade-leave"
-									:duration="1000"
-								>
+								<transition-group name="crossfade" tag="ul" class="flex_shrink ul_none">
 									<li
-										class="inline-block br_radius c_white p_1 inline-block m-x_1 p-x_2 p-x_3:md flex_shrink"
+										class="inline-block p_1 inline-block m-x_1 p-x_2 p-x_3:md"
 										v-for="(credit, index) in creditsFilteredList"
 										v-bind:key="index+'_credit'"
-										:class="['bg_' + credit]"
-									>
-										<span class="font_bold">{{credit}}</span>
-									</li>
+										:class="['bg_' + credit+'-3 c_' + credit+'-n2']"
+									>{{credit}}</li>
 								</transition-group>
 							</ul>
+						</li>
+						<li class="font_n2 font_n1:md m-t_3">
+							<span class="capitalize font_bold c_secondary-1">Date Range</span>
+							<span
+								class="c_secondary-n3 m-l_3 font_bold font_italic"
+								v-if="filterStartDate == '1949-01-01' && filterEndDate==''"
+							>None</span>
+							<span v-else class="c_primary font_bold m-l_3">
+								{{filterStartDate}} to
+								<span v-if="filterEndDate == ''">Today</span>
+								<span v-if="filterEndDate !== ''">{{filterEndDate}}</span>
+							</span>
 						</li>
 					</ul>
 				</div>
 				<div class="flex_shrink:md p-x_4 p-y_3 bg_primary c_white text_center lh_0">
-					<span class="block font_5">10</span>
+					<span class="block font_4">{{filteredCreditCount}}</span>
 					<span class="block font_n2 font_bold c_primary-4 uppercase">Credits</span>
 				</div>
 			</div>
 		</div>
 		<div class="m-x_n4 m-x_n2:md m-x_0">
-			<transition-group
-				appear
-				name="search"
-				enter-active-class="crossFade"
-				appear-active-class="crossFade-enter"
-				leave-active-class="crossFade-leave"
-				:duration="1000"
-				v-if="transcriptFiltered"
-			>
+			<transition-group tag="div" name="crossFade">
 				<transcriptItem
-					v-for="(item) in transcriptFiltered"
-					v-bind:key="item.ID"
-					v-bind="item"
+					v-for="(activity) in transcriptFiltered"
+					v-bind:key="activity.ID+'_activity'"
+					v-bind="activity"
 					:selectedCreditFilter="selectedCreditFilter"
 				/>
 			</transition-group>
@@ -154,7 +156,7 @@ export default {
 	name: "app",
 	data: function() {
 		return {
-			filterStartDate: "1970-01-01",
+			filterStartDate: "2018-01-01",
 			filterEndDate: "",
 			selectedCreditFilter: ["All"],
 			sortType: []
@@ -167,6 +169,24 @@ export default {
 	},
 	computed: {
 		...mapState(["transcript", "creditTypes"]),
+		fullCreditCount: function() {
+			var creditCount = 0;
+			this.transcript.forEach(activity => {
+				activity.Credits.forEach(credit => {
+					creditCount += Number.parseFloat(credit.Amount);
+				});
+			});
+			return creditCount.toFixed(1);
+		},
+		filteredCreditCount: function() {
+			var creditCount = 0;
+			this.transcriptFiltered.forEach(activity => {
+				activity.Credits.forEach(credit => {
+					creditCount += Number.parseFloat(credit.Amount);
+				});
+			});
+			return creditCount.toFixed(1);
+		},
 		creditsInList: function() {
 			var arr = ["CME"];
 			var list = this.transcript;
@@ -201,10 +221,16 @@ export default {
 			return newArr;
 		},
 		transcriptFiltered: function() {
-			var tranFiltered = this.transcript,
-				arr = [];
+			var arr = [];
 			this.transcript.forEach(element => {
-				if (this.isTranscriptFilteredOut(element.Credits)) {
+				var inDate = this.isDateInFilter(element.DateClaimed);
+				var inCreditFilter = false;
+				element.Credits.forEach(credit => {
+					if (this.isCreditTypeInFilter(credit.Type)) {
+						inCreditFilter = true;
+					}
+				});
+				if (inDate && inCreditFilter) {
 					arr.push(element);
 				}
 			});
@@ -221,16 +247,20 @@ export default {
 				this.selectedCreditFilter.length() == 1;
 			return bool;
 		},
-		isTranscriptFilteredOut(credits) {
-			var arr;
-			for (const credit in credits) {
-				if (credits.hasOwnProperty(credit)) {
-					const element = credits[credit];
-					arr.push(element.Type);
-				}
-			}
+		isCreditTypeInFilter: function(type) {
+			return this.creditsFilteredList.indexOf(type) !== -1 ? true : false;
+		},
+		isDateInFilter: function(date) {
+			var start, end, activityDate;
+			activityDate = new Date(date);
+			start =
+				new Date(this.filterStartDate) == "invalid date"
+					? new Date("1970-01-01")
+					: new Date(this.filterStartDate);
+			end =
+				this.filterEndDate == "" ? new Date() : new Date(this.filterEndDate);
 
-			return arr.some(r => this.selectedCreditFilter.indexOf(r) >= 0);
+			return start <= activityDate && activityDate <= end ? true : false;
 		}
 	}
 };
@@ -240,6 +270,15 @@ export default {
 .viewport {
 	min-height: 100vh;
 	overflow-x: hidden;
+}
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: 0.5s;
 }
 /*.slideInRight-enter-active {
 	transition-delay: 0.5s;
@@ -269,16 +308,14 @@ export default {
 	transition: opacity 0.25s ease 0.25s;
 }
 
-.crossFade-leave-to /* .slideIn-leave-active below version 2.1.8 */ {
-	opacity: 0;
-}
-.crossFade-enter /* .slideIn-leave-active below version 2.1.8 */ {
+.crossFade-leave-to,
+.crossFade-enter {
 	opacity: 0;
 }
 .crossFade-enter-to {
 	opacity: 1;
 }
 .crossFade-move {
-	transition: opacity 0.5s ease;
+	transition: 0.5s ease;
 }
 </style>
