@@ -27,29 +27,41 @@
 			<div id="Sort" class="flex_auto p-r_5">
 				<span class="uppercase c_secondary font_bold font_n2 m-x_2">Sort</span>
 				<ul class="flex flex_column flex_row:md font_bold font_n2 font_ui ul_none">
-					<li class="flex_shrink is-active">
-						<a
-							href
+					<li
+						class="flex_shrink"
+						:class="{'is-active': selectedSort =='Date'}"
+						@click="selectedSort ='Date'"
+					>
+						<span
 							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Date</a>
+						>Date</span>
 					</li>
-					<li class="flex_shrink">
-						<a
-							href
+					<li
+						class="flex_shrink"
+						:class="{'is-active': selectedSort =='Product'}"
+						@click="selectedSort ='Product'"
+					>
+						<span
 							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Product</a>
+						>Product</span>
 					</li>
-					<li class="flex_shrink">
-						<a
-							href
+					<li
+						class="flex_shrink"
+						:class="{'is-active': selectedSort =='Type'}"
+						@click="selectedSort ='Type'"
+					>
+						<span
 							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Type</a>
+						>Type</span>
 					</li>
-					<li class="flex_shrink">
-						<a
-							href
+					<li
+						class="flex_shrink"
+						:class="{'is-active': selectedSort =='Claimed'}"
+						@click="selectedSort ='Claimed'"
+					>
+						<span
 							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Claimed</a>
+						>Claimed</span>
 					</li>
 				</ul>
 			</div>
@@ -159,7 +171,8 @@ export default {
 			filterStartDate: "2018-01-01",
 			filterEndDate: "",
 			selectedCreditFilter: ["All"],
-			sortType: []
+			sortType: [],
+			selectedSort: "Date"
 		};
 	},
 	props: {},
