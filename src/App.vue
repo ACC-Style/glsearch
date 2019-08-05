@@ -38,12 +38,21 @@
 					</li>
 					<li
 						class="flex_shrink"
+						:class="{'is-active': selectedSort =='Activity'}"
+						@click="selectedSort ='Activity'"
+					>
+						<span
+							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
+						>Activity Name</span>
+					</li>
+					<li
+						class="flex_shrink"
 						:class="{'is-active': selectedSort =='Product'}"
 						@click="selectedSort ='Product'"
 					>
 						<span
 							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Product</span>
+						>Product Name</span>
 					</li>
 					<li
 						class="flex_shrink"
@@ -136,6 +145,7 @@
 					v-for="(activity) in transcriptFiltered"
 					v-bind:key="activity.ID+'_activity'"
 					v-bind="activity"
+					:selectedSort="selectedSort"
 					:selectedCreditFilter="selectedCreditFilter"
 				/>
 			</transition-group>
@@ -248,12 +258,31 @@ export default {
 				}
 			});
 
-			return arr;
+			return arr.sort(this.compare);
 		}
 	},
 	methods: {
 		...mapMutations([]),
 		...mapActions([]),
+		compare: function(a, b) {
+			let comparison = 0;
+			switch (this.selectedSort) {
+				case "Date":
+					comparison =
+						new Date(a.DateClaimed) >= new Date(b.DateClaimed) ? -1 : 1;
+					break;
+				case "Activity":
+					comparison = a.Activity <= b.Activity ? -1 : 1;
+					break;
+				case "Product":
+					comparison = a.ProductTitle <= b.ProductTitle ? -1 : 1;
+					break;
+				default:
+					break;
+			}
+
+			return comparison;
+		},
 		creditBoolean: function(credit) {
 			var bool =
 				this.selectedCreditFilter.indexOf(credit) != -1 ||
@@ -284,38 +313,6 @@ export default {
 	min-height: 100vh;
 	overflow-x: hidden;
 }
-.fade-enter,
-.fade-leave-to {
-	opacity: 0;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-	transition: 0.5s;
-}
-/*.slideInRight-enter-active {
-	transition-delay: 0.5s;
-}*/
-.slideInRight-leave-to /* .slideIn-leave-active below version 2.1.8 */ {
-	transform: translateX(-100%);
-	opacity: 0;
-}
-.slideInRight-enter /* .slideIn-leave-active below version 2.1.8 */ {
-	transform: translateX(100%);
-	opacity: 0;
-}
-.slideInRight-enter-to {
-	transform: translateX(1);
-	opacity: 1;
-}
-.slideInRight-move {
-	transition: transform 0.5s ease;
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-}
-
 .crossFade-enter-active,
 .crossFade-leave-active {
 	transition: opacity 0.25s ease 0.25s;

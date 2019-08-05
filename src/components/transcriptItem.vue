@@ -31,12 +31,23 @@
 								</span>
 							</div>
 						</div>
-						<span class="block c_secondary-n4 font_2:md font_1">
+					</div>
+					<div
+						class="font_1 font_0:md font_bold bg_accent-4 c_black p_2 p-x_3 br_radius inline-block m-t_2 m-b_n2 self_baseline m-r_3"
+						v-if="selectedSort == 'Product'"
+					>
+						<span>{{ProductTitle}}</span>
+					</div>
+					<div class="block c_secondary-n4 font_2:md font_1">
+						<span>
 							<span v-if="Course">{{Course}} -</span>
 							{{Activity}}
 						</span>
 					</div>
-					<div class="font_n2 font_n1:md font_bold c_accent self_baseline m-r_3" v-if="ProductTitle">
+					<div
+						class="font_n2 font_n1:md font_bold c_accent self_baseline m-r_3"
+						v-if="selectedSort != 'Product'"
+					>
 						<span>{{ProductTitle}}</span>
 					</div>
 				</div>
@@ -88,7 +99,8 @@ export default {
 		DateCompleted: { type: String, default: "0/0/00" },
 		DateClaimed: { type: String, default: "1/1/00" },
 		Credits: { type: Array },
-		selectedCreditFilter: { type: Array }
+		selectedCreditFilter: { type: Array },
+		selectedSort: { type: String, default: "Date" }
 	},
 	data: function() {
 		return {

@@ -44,10 +44,7 @@ export default {
 			if (this.selectedFilter.indexOf(type) == -1) {
 				this.selectedFilter.push(type);
 			} else {
-				this.selectedFilter.splice(
-					this.selectedFilter.indexOf(type),
-					1
-				);
+				this.selectedFilter.splice(this.selectedFilter.indexOf(type), 1);
 			}
 			this.emitFilter();
 		},
@@ -65,9 +62,7 @@ export default {
 			for (const credit in this.creditTypes) {
 				if (this.creditTypes.hasOwnProperty(credit)) {
 					const creditObject = this.creditTypes[credit];
-					if (
-						this.creditsInList.indexOf(creditObject.styleCode) != -1
-					) {
+					if (this.creditsInList.indexOf(creditObject.styleCode) != -1) {
 						arr.push(creditObject);
 					}
 				}
