@@ -4,71 +4,66 @@
 		:class="{'is-active':IsActive}"
 		@click="function(){ IsActive = !IsActive }"
 	>
-		<div class="br-b_1 br_primary-3 a:bg_primary-5 br_dotted font_ui p_3 p-x_4 relative flex">
-			<div class="flex_auto">
-				<div class="flex_auto font_n2 absolute t_0 r_0 opacity_5 display_none">
-					<span class="font_bold">Product ID:</span>
-					<span class="font_italic c_primary font_n2">{{ID}}</span>
+		<header class="font_ui p_3 p-x_4 p-b_0 relative">
+			<div class="flex_auto font_n2 absolute t_0 r_0 opacity_5 display_none">
+				<span class="font_bold">Product ID:</span>
+				<span class="font_italic c_primary font_n2">{{ID}}</span>
+			</div>
+			<section id="label">
+				<div class="block self_baseline m-b_3" v-if="selectedSort == 'Product' && ProductTitle">
+					<span
+						class="font_0 font_n1:md font_bold bg_accent-4 c_black-7 p_2 p-x_3 br_radius"
+					>{{ProductTitle}}</span>
 				</div>
-				<div class>
-					<div class="self_baseline m-r_3">
-						<div>
-							<span
-								class="inline-block c_secondary-3 font_n2:md font_n3 uppercase font_bold"
-								:class="{'bg_warning c_white p-x_3 p-y_1 br_radius':External}"
-							>
-								<span v-if="External">Non ACC &nbsp;</span>Activity
-							</span>
-							<div
-								v-if="External"
-								class="font_n2:md font_n3 uppercase font_bold c_secondary-1 inline-block m-x_1"
-							>
-								<span class="p-y_1 p-x_3 br_radius m-x_1 h:bg_secondary h:c_white">
-									<i class="fas fa-edit"></i> &nbsp;Edit
-								</span>
-								<span class="p-y_1 p-x_3 br_radius m-x_1 h:bg_secondary h:c_white">
-									<i class="fas fa-times"></i> &nbsp; Delete
-								</span>
-							</div>
-						</div>
-					</div>
+				<div
+					class="inline-block c_secondary-3 font_n2:lg font_n1 uppercase font_bold"
+					:class="{'bg_warning-2 c_black-7 p-l_3 p-y_2 br_radius':External}"
+				>
+					<span v-if="External">Non ACC &nbsp;</span>
+					<span>Activity</span>
 					<div
-						class="font_1 font_0:md font_bold bg_accent-4 c_black p_2 p-x_3 br_radius inline-block m-t_2 m-b_n2 self_baseline m-r_3"
-						v-if="selectedSort == 'Product'"
+						v-if="External"
+						class="font_n2:lg m-l_3 m-r_n1 font_n1 uppercase font_bold c_black inline-block"
 					>
-						<span>{{ProductTitle}}</span>
-					</div>
-					<div class="block c_secondary-n4 font_2:md font_1">
-						<span>
-							<span v-if="Course">{{Course}} -</span>
-							{{Activity}}
+						<span
+							class="p-y_2 p-x_4 br-l_1 br_solid br_black-3 bg_secondary-4 h:bg_secondary-n5 h:c_white"
+						>
+							<i class="fas fa-edit"></i>
+							<span class="display_none inline:md">&nbsp;Edit</span>
+						</span>
+						<span
+							class="p-y_2 p-x_4 br-l_1 br_solid br_black-3 bg_secondary-4 h:bg_secondary-n5 h:c_white br-tr_radius br-br_radius"
+						>
+							<i class="fas fa-trash"></i>
+							<span class="display_none inline:md">&nbsp;Delete</span>
 						</span>
 					</div>
-					<div
-						class="font_n2 font_n1:md font_bold c_accent self_baseline m-r_3"
-						v-if="selectedSort != 'Product'"
-					>
-						<span>{{ProductTitle}}</span>
+				</div>
+
+				<div class="block c_secondary-n4 font_2:md font_1">
+					<span>
+						<span v-if="Course">{{Course}} -</span>
+						{{Activity}}
+					</span>
+				</div>
+				<div
+					class="font_n2 font_n1:md font_bold c_accent self_baseline m-r_3"
+					v-if="selectedSort != 'Product'"
+				>
+					<span>{{ProductTitle}}</span>
+				</div>
+			</section>
+		</header>
+		<div class="br-b_1 br_primary-3 a:bg_primary-5 br_dotted font_ui p_3 p-x_4 relative flex">
+			<div class="flex_auto">
+				<div class="font_italic font_n3">
+					<div class="m-t_n3 m-b_2">
+						<span>Date Claimed:</span>&nbsp;
+						<span>{{DateClaimed}}</span>
 					</div>
 				</div>
-				<div class="flex absolute:lg t_4 r_4 font_italic font_n3">
-					<div class="shrink p-x_3:lg p-l_0">
-						<div class>
-							<span>Date Completed:</span>&nbsp;
-							<span>{{DateCompleted}}</span>
-						</div>
-					</div>
-					<div class="shrink p-x_3">
-						<div class>
-							<span>Date Claimed:</span>&nbsp;
-							<span>{{DateClaimed}}</span>
-						</div>
-					</div>
-				</div>
-				<div>
-					<a href class="download font_n2 c_primary">
-						<i class="fas fa-badge-check"></i> Download Certificate
-					</a>
+				<div class="download font_n2 c_primary undecorated h:underline">
+					<i class="fas fa-badge-check m-r_2"></i> Download Certificate
 				</div>
 			</div>
 			<div class="flex_shrink w-grid_3 w-grid_4:md self_end">

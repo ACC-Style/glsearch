@@ -1,28 +1,46 @@
 <template>
 	<div id="app" class="p_4 viewport">
-		<h1 class="br-b_1 br_primary br_solid font_display lh_0 m_0 relative p-t_4 p-b_2">
-			My Transcript
-			<span
-				class="a:_block c_secondary-2 font_n1 inline-block m-b_2 vertical-align_middle w_100"
+		<header id="transcript_header" class="relative">
+			<h1
+				class="br-b_1 br_primary br_solid font_display lh_0 m_0 relative p-t_4 p-b_2 text_center text_left:md"
 			>
-				Total Credits in Transcript:
-				<span>{{fullCreditCount}}</span>
-			</span>
-			<div id="dateRange" class="absolute:md text_right:md t_n4 r_0 font_0:md font_n1 p_4 c_secondary">
+				My Transcript
+				<span
+					class="a:_block c_secondary-2 font_n1 inline-block m-b_2 vertical-align_middle w_100"
+				>
+					Total Credits in Transcript:
+					<span>{{fullCreditCount}}</span>
+				</span>
+			</h1>
+			<div class="absolute:md t_0 r_0 b_0 text_center text_right:md font_ui">
+				<div id="dateRange" class="font_0:md font_n1 m-y_2 c_secondary m-b_3:md">
+					<span class="block inline:md m-b_2 m-b_0:md">Date Claimed:</span>
+					<input
+						type="date"
+						class="lh_0 p_2 font_0 text_center br_solid br_secondary-3 br_1"
+						name
+						id
+						v-model="filterStartDate"
+					/> -
+					<input
+						type="date"
+						class="lh_0 p_2 font_0 text_center br_solid br_secondary-3 br_1"
+						name
+						id
+						v-model="filterEndDate"
+					/>
+					<i
+						class="bg_secondary-3 br-b_1 br_secondary-3 br_solid fa-calendar far font_n1 p-l_3 p-r_3 p-t_3 p_3 vertical-align_bottom"
+					></i>
+				</div>
 				<a
 					href
-					class="button bg_primary font_n1 br_radius p-y_3 m-b_3 p-x_4 inline-block c_white undecorated h:bg_secondary h:c_white absolute t_5 t_0:lg r_0 relative:md"
+					class="button bg_primary text_center font_n1:md br_radius p-y_3 m-b_3 p-x_4 block inline-block:md m-t_3 m-t_0:md c_white undecorated h:bg_secondary h:c_white"
 				>
 					<i class="fas fa-plus m-r_3"></i> Add Non ACC Activity
 				</a>
-				<div>
-					Date Claimed:
-					<input type="date" name id v-model="filterStartDate" /> -
-					<input type="date" name id v-model="filterEndDate" />
-					<i class="fa-calendar far font_2 m-l_3 vertical-align_middle"></i>
-				</div>
 			</div>
-		</h1>
+		</header>
 		<div id="fiterAndSortContainer" class="font_ui p-y_4 flex">
 			<div id="Sort" class="flex_auto p-r_5">
 				<span class="uppercase c_secondary font_bold font_n2 m-x_2">Sort</span>
@@ -43,7 +61,7 @@
 					>
 						<span
 							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Activity Name</span>
+						>Activity</span>
 					</li>
 					<li
 						class="flex_shrink"
@@ -52,7 +70,7 @@
 					>
 						<span
 							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Product Name</span>
+						>Product</span>
 					</li>
 					<li
 						class="flex_shrink"
@@ -86,40 +104,21 @@
 				<div class="flex_shrink p-x_4"></div>
 				<div class="flex_shrink p-l_4 uppercase">
 					<span class="c_secondary-n3 m-l_3">
-						<span
-							v-if="(selectedCreditFilter.length > 1 && selectedCreditFilter[1] != 'All' )"
-						>Credit Type</span>
+						<span class="p-r_3">Filtered:</span>
+
+						<span class="c_secondary-n3" v-if="filterStartDate != '1949-01-01' || filterEndDate==''">Date</span>
 						<span
 							class="m-x_3"
 							v-if="(selectedCreditFilter.length > 1 && selectedCreditFilter[1] != 'All' ) && (filterStartDate != '1949-01-01' || filterEndDate=='')"
 						>&amp;</span>
-						<span class="c_secondary-n3" v-if="filterStartDate != '1949-01-01' || filterEndDate==''">Date</span>
+						<span v-if="(selectedCreditFilter.length > 1 && selectedCreditFilter[1] != 'All' )">Credit</span>
 					</span>
-					<span class="p-l_3">Filtered by</span>
 				</div>
 			</div>
 			<div class="flex">
-				<div class="flex_auto p-x_4 p-y_3">
+				<div class="flex_auto w_70 p-x_4 p-y_3">
 					<ul class="ul_none lh_3">
-						<li>
-							<ul class="ul_none flex flex_wrap font_n2 font_n1:md">
-								<li class="font_bold flex_shrink m-r_3">
-									<span class="c_secondary-1 capitalize">Credit Types</span>
-									<span class="c_primary-0 font_n1 h:dotted inline-block m-t_n2 vertical-align_top">
-										<i class="fa-question-circle fas"></i>
-									</span>
-								</li>
-								<transition-group name="crossfade" tag="ul" class="flex_shrink ul_none">
-									<li
-										class="inline-block p_1 inline-block m-x_1 p-x_2 p-x_3:md"
-										v-for="(credit, index) in creditsFilteredList"
-										v-bind:key="index+'_credit'"
-										:class="['bg_' + credit+'-3 c_' + credit+'-n2']"
-									>{{credit}}</li>
-								</transition-group>
-							</ul>
-						</li>
-						<li class="font_n2 font_n1:md m-t_3">
+						<li class="font_n2 font_n1:md">
 							<span class="capitalize font_bold c_secondary-1">Date Range</span>
 							<span
 								class="c_secondary-n3 m-l_3 font_bold font_italic"
@@ -133,9 +132,32 @@
 						</li>
 					</ul>
 				</div>
-				<div class="flex_shrink:md p-x_4 p-y_3 bg_primary c_white text_center lh_0">
-					<span class="block font_4">{{filteredCreditCount}}</span>
-					<span class="block font_n2 font_bold c_primary-4 uppercase">Credits</span>
+				<div class="flex_shrink:md w_30">
+					<div
+						v-if="selectedCreditFilter.length == 1"
+						class="p-x_4 p-y_3 bg_primary c_white text_center lh_0"
+					>
+						<span class="block font_4">{{filteredCreditCount['All']}}</span>
+						<span class="block font_n2 font_bold c_primary-4 uppercase">Credits</span>
+					</div>
+					<div v-else>
+						<transition-group
+							name="crossfade"
+							tag="ul"
+							class="ul_none flex bg_secondary-n1"
+							:class="{'flex_row flex_wrap':creditsFilteredList.length>4,'flex_column ':creditsFilteredList.length<=4}"
+						>
+							<li
+								class="p-x_4 p-y_3 flex lh_0 font_bold"
+								v-for="(credit, index) in creditsFilteredList"
+								v-bind:key="index+'_credit'"
+								:class="creditCounterDecorator(credit,creditsFilteredList.length)"
+							>
+								<span class="flex_auto p-r_4">{{credit}}</span>
+								<span class="flex_shrink">{{filteredCreditCount[credit]}}</span>
+							</li>
+						</transition-group>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -201,14 +223,26 @@ export default {
 			});
 			return creditCount.toFixed(1);
 		},
+
 		filteredCreditCount: function() {
-			var creditCount = 0;
+			var creditCount = {};
+			creditCount["All"] = 0;
 			this.transcriptFiltered.forEach(activity => {
 				activity.Credits.forEach(credit => {
-					creditCount += Number.parseFloat(credit.Amount);
+					creditCount["All"] += credit.Amount * 10;
+					if (!creditCount.hasOwnProperty(credit.Type)) {
+						creditCount[credit.Type] = 0;
+					}
+					creditCount[credit.Type] += credit.Amount * 10;
 				});
 			});
-			return creditCount.toFixed(1);
+			for (const key in creditCount) {
+				if (creditCount.hasOwnProperty(key)) {
+					var newVal = creditCount[key] / 10;
+					creditCount[key] = newVal;
+				}
+			}
+			return creditCount;
 		},
 		creditsInList: function() {
 			var arr = ["CME"];
@@ -283,6 +317,15 @@ export default {
 
 			return comparison;
 		},
+		creditCounterDecorator: function(credit, count) {
+			var classCode = "bg_" + credit + " c_white";
+			if (count < 3) classCode = classCode + " font_2";
+			if (count == 3) classCode = classCode + " font_1";
+			if (count == 4) classCode = classCode + " font_0";
+			if (count > 4)
+				classCode = classCode + " w_50 br_solid br_white-5 br_1 font_n1";
+			return classCode;
+		},
 		creditBoolean: function(credit) {
 			var bool =
 				this.selectedCreditFilter.indexOf(credit) != -1 ||
@@ -329,3 +372,7 @@ export default {
 	transition: 0.5s ease;
 }
 </style>
+
+function newFunction(element) {
+	console.log(element);
+}
