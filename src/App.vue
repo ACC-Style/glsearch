@@ -6,7 +6,7 @@
 			>
 				My Transcript
 				<span
-					class="a:_block c_secondary-2 font_n1 inline-block m-b_2 vertical-align_middle w_100"
+					class="print-display_none c_secondary-2 font_n1 inline-block m-b_2 vertical-align_middle w_100"
 				>
 					Total Credits in Transcript:
 					<span>{{fullCreditCount}}</span>
@@ -379,7 +379,7 @@ export default {
 	.print-display_block {
 		display: block !important;
 	}
-		.print-display_inline-block {
+	.print-display_inline-block {
 		display: inline-block !important;
 	}
 	.print-p_0 {
