@@ -117,7 +117,7 @@
 				</div>
 			</div>
 			<div class="flex print-br_black">
-				<div class="flex_auto w_70 p-x_4 p-y_3">
+				<div class="flex_auto w_70:md w_60:md p-x_4 p-y_3">
 					<ul class="ul_none lh_3">
 						<li class="font_n2 font_n1:md">
 							<span class="capitalize font_bold c_secondary-1">Date Range</span>
@@ -133,7 +133,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="flex_shrink:md w_30 print-br_black">
+				<div class="flex_shrink:md w_30:lg w_40:lg print-br_black">
 					<div
 						v-if="selectedCreditFilter.length == 1"
 						class="p-x_4 p-y_3 bg_primary c_white text_center lh_0"
