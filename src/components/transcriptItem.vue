@@ -41,7 +41,7 @@
 						</div>
 					</div>
 
-					<div class="block c_secondary-n4 font_2:md font_1">
+					<div class="block c_secondary-n4 m-t_2  font_1:md font_0">
 						<span
 							v-if="External"
 							class="font_n4 print-br_black display_none print-display_inline-block p_1 p-x_2 m-r_3 m-t_n2 vertical-align_middle"
@@ -61,18 +61,18 @@
 				</section>
 			</header>
 			<div class="br-b_1 br_primary-3 br_dotted font_ui print-p_0 p-y_3 p-x_4 relative flex">
-				<div class="flex_auto">
+				<div class="flex_auto self_end">
 					<div class="font_italic font_n3">
 						<div class="m-t_n3 m-b_2 print-m_0">
 							<span>Date Claimed:</span>&nbsp;
 							<span>{{DateClaimed}}</span>
 						</div>
 					</div>
-					<div class="download font_n2 c_primary undecorated h:underline print-display_none">
+					<div class="download font_n2 c_primary undecorated h:underline print-display_none sm_button">
 						<i class="fas fa-badge-check m-r_2"></i> Download Certificate
 					</div>
 				</div>
-				<div class="flex_shrink w-grid_3 w-grid_4:md self_end">
+				<div class="flex_shrink w-grid_4 w-grid_3:md self_end">
 					<ul class="ul_none flex flex_wrap flex_row-reverse:md flex_column font_n1 font_0:md">
 						<li
 							v-for="(credit, credit_index) in Credits"
@@ -113,13 +113,7 @@ export default {
 		creditDecoration: function(type) {
 			var decorationClasses =
 				this.selectedCreditFilter.indexOf(type) != -1 ||
-				this.selectedCreditFilter.length == 1
-					? "order_0 c_white bg_" +
-					  type +
-					  " br_solid br_1 print-display_block br_" +
-					  type
-					: "order_last br_secondary-4 bg_secondary-5  c_secondary-3 br_1 br_dashed print-display_none";
-
+				this.selectedCreditFilter.length == 1 ? "order_0 c_white bg_" + type + " br_solid br_1 print-display_block br_" + type : "order_last br_secondary-4 bg_secondary-5  c_secondary-3 br_1 br_dashed print-display_none";
 			return decorationClasses;
 		}
 	}

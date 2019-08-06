@@ -2,7 +2,7 @@
 	<div id="app" class="p_4 viewport">
 		<header id="transcript_header" class="relative">
 			<h1
-				class="br-b_1 br_primary br_solid font_display lh_0 m_0 relative p-t_4 p-b_2 text_center text_left:md"
+				class=" font_display lh_0 m_0 relative p-t_4 p-b_2 text_center text_left:md"
 			>
 				My Transcript
 				<span
@@ -41,8 +41,9 @@
 				</a>
 			</div>
 		</header>
-		<div id="fiterAndSortContainer" class="font_ui p-y_4 flex print-display_none">
-			<div id="Sort" class="flex_auto p-r_5">
+		<div id="fiterAndSortContainer" class="b_0 br-t_1 br_primary br_solid bg_black-3 fixed font_ui l_0 t_0 p-x_0:md p_4 p_0:md print-display_none r_0 relative:md display_none block:md" style="z-index:1000">
+			<div class="bg_white p_4 flex">
+				<div id="Sort" class="flex_auto p-r_4">
 				<span class="uppercase c_secondary font_bold font_n2 m-x_2">Sort</span>
 				<ul class="flex flex_column flex_row:md font_bold font_n2 font_ui ul_none">
 					<li
@@ -97,6 +98,7 @@
 				:creditsInList="creditsInList"
 				v-on:updatefitler="selectedCreditFilter = $event"
 			></filterCreditType>
+			</div>
 		</div>
 		<div id="summaryView" class="bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
 			<div
@@ -371,6 +373,16 @@ export default {
 }
 .crossFade-move {
 	transition: 0.5s ease;
+}
+@media only screen and (max-width: 1024px)
+{
+	.sm_button {
+    padding:.35rem 1rem;
+	border-radius: .3333333333rem;
+	background-color: #dedee0!important;
+	color:black !important;
+	display:inline-block;
+}
 }
 @media print {
 	.print-display_none {

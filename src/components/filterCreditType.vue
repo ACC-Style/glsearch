@@ -1,5 +1,5 @@
 <template>
-	<div id="CreditType" class="text_right flex_end flex_auto p-l_5">
+	<div id="CreditType" class="text_right flex_end flex_auto p-l_4">
 		<span class="uppercase c_secondary font_bold font_n2 m-x_2">
 			Filter Credit Types
 			<i class="fas fa-question-circle"></i>

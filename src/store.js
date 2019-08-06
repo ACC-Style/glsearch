@@ -21,12 +21,12 @@ export default new Vuex.Store({
 				styleCode: "CE"
 			},
 			{
-				shortName: "MOC II",
+				shortName: "MOC&nbsp;II",
 				fullName: "ABIM MOC Part II",
 				styleCode: "MOCII"
 			},
 			{
-				shortName: "MOC IV",
+				shortName: "MOC&nbsp;IV",
 				fullName: "ABIM MOC Part IV",
 				styleCode: "MOCIV"
 			},
@@ -60,7 +60,7 @@ export default new Vuex.Store({
 			"ID": 1,
 			"ProductTitle": "Heart Songs",
 			"Course": null,
-			"Activity": "Stronghold",
+			"Activity": "The Society of Cardiovascular Patient Care (SCPC) is now called ACC Accreditation Services",
 			"DateCompleted": "4/4/2018",
 			"DateClaimed": "11/25/2018",
 			"Credits": [{
