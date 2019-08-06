@@ -30,7 +30,7 @@
 						v-model="filterEndDate"
 					/>
 					<i
-						class="bg_secondary-3 br-b_1 br_secondary-3 br_solid fa-calendar far font_n1 p-l_3 p-r_3 p-t_3 p_3 vertical-align_bottom"
+						class="bg_secondary-3 br-b_1 br_secondary-3 br_solid fa-calendar fas font_n1 p-l_3 p-r_3 p-t_3 p_3 vertical-align_bottom"
 					></i>
 				</div>
 				<a

@@ -73,12 +73,12 @@
 					</div>
 				</div>
 				<div class="flex_shrink w-grid_4 w-grid_3:md self_end">
-					<ul class="ul_none flex flex_wrap flex_row-reverse:md flex_column font_n1 font_0:md">
+					<ul class="ul_none flex flex_wrap flex_row-reverse:md flex_column font_n1 font_0:md self_end">
 						<li
 							v-for="(credit, credit_index) in Credits"
 							v-bind:key="credit_index"
 							:class="creditDecoration(credit.Type)"
-							class="br_radius p-y_1 p-x_2 p-y_2:md p-x_3:md block inline-block:md m-x_2 flex_shrink text_center m-b_2 transition_2"
+							class="br_radius p-y_1 p-x_2 p-y_2:md p-x_3:md block inline-block:md m-x_2 flex_shrink text_center m-t_2 transition_2"
 						>
 							<span>{{credit.Type}}</span>
 							<span class="font_bold m-l_3 p-l_3 br-l_1 br_solid br_white">{{credit.Amount}}</span>
