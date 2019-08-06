@@ -12,7 +12,7 @@
 					<span>{{fullCreditCount}}</span>
 				</span>
 			</h1>
-			<div class="absolute:md t_0 r_0 b_0 text_center text_right:md font_ui">
+			<div class="absolute:md t_0 r_0 b_0 text_center text_right:md font_ui print-display_none">
 				<div id="dateRange" class="font_0:md font_n1 m-y_2 c_secondary m-b_3:md">
 					<span class="block inline:md m-b_2 m-b_0:md">Date Claimed:</span>
 					<input
@@ -41,7 +41,7 @@
 				</a>
 			</div>
 		</header>
-		<div id="fiterAndSortContainer" class="font_ui p-y_4 flex">
+		<div id="fiterAndSortContainer" class="font_ui p-y_4 flex print-display_none">
 			<div id="Sort" class="flex_auto p-r_5">
 				<span class="uppercase c_secondary font_bold font_n2 m-x_2">Sort</span>
 				<ul class="flex flex_column flex_row:md font_bold font_n2 font_ui ul_none">
@@ -99,9 +99,10 @@
 			></filterCreditType>
 		</div>
 		<div id="summaryView" class="bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
-			<div class="flex bg_secondary-2 font_n2 font_n1:md c_white p_2 p-x_4 font_bold">
+			<div
+				class="flex bg_secondary-2 font_n2 font_n1:md c_white p_2 p-x_4 font_bold print-display_none"
+			>
 				<div class="flex_auto uppercase">list summary</div>
-				<div class="flex_shrink p-x_4"></div>
 				<div class="flex_shrink p-l_4 uppercase">
 					<span class="c_secondary-n3 m-l_3">
 						<span class="p-r_3">Filtered:</span>
@@ -115,7 +116,7 @@
 					</span>
 				</div>
 			</div>
-			<div class="flex">
+			<div class="flex print-br_black">
 				<div class="flex_auto w_70 p-x_4 p-y_3">
 					<ul class="ul_none lh_3">
 						<li class="font_n2 font_n1:md">
@@ -132,7 +133,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="flex_shrink:md w_30">
+				<div class="flex_shrink:md w_30 print-br_black">
 					<div
 						v-if="selectedCreditFilter.length == 1"
 						class="p-x_4 p-y_3 bg_primary c_white text_center lh_0"
@@ -148,13 +149,13 @@
 							:class="{'flex_row flex_wrap':creditsFilteredList.length>4,'flex_column ':creditsFilteredList.length<=4}"
 						>
 							<li
-								class="p-x_4 p-y_3 flex lh_0 font_bold"
+								class="p-x_4 p-y_3 flex lh_0 font_bold print-br_black"
 								v-for="(credit, index) in creditsFilteredList"
 								v-bind:key="index+'_credit'"
 								:class="creditCounterDecorator(credit,creditsFilteredList.length)"
 							>
 								<span class="flex_auto p-r_4">{{credit}}</span>
-								<span class="flex_shrink">{{filteredCreditCount[credit]}}</span>
+								<span class="flex_shrink print-c_black">{{filteredCreditCount[credit]}}</span>
 							</li>
 						</transition-group>
 					</div>
@@ -174,7 +175,7 @@
 		</div>
 		<div
 			id="loadMore "
-			class="c_white-8 text_center p-y_3 font_slab br-t_2 br_solid br_primary-1 bg_primary-1 m-x_n4"
+			class="c_white-8 text_center p-y_3 font_slab br-t_2 br_solid br_primary-1 bg_primary-1 m-x_n4 print-display_none"
 		>
 			Showing First 20 Results
 			<a
@@ -370,6 +371,42 @@ export default {
 }
 .crossFade-move {
 	transition: 0.5s ease;
+}
+@media print {
+	.print-display_none {
+		display: none !important;
+	}
+	.print-display_block {
+		display: block !important;
+	}
+		.print-display_inline-block {
+		display: inline-block !important;
+	}
+	.print-p_0 {
+		padding: 0 !important;
+	}
+	.print-m_0 {
+		margin: 0 !important;
+	}
+	.print-flex_row {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	.print-flex_row > * {
+		flex: 1 0 auto !important;
+		display: inline-block;
+		padding-right: 0.5rem;
+		padding-left: 0rem;
+	}
+	.print-br_black {
+		border: rgb(73, 73, 73) 1px solid !important;
+	}
+	.print-c_black {
+		color: black !important;
+	}
+	.print-font_0 {
+		font-size: 1rem !important;
+	}
 }
 </style>
 
