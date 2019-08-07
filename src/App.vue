@@ -42,62 +42,17 @@
 			</div>
 		</header>
 		<div id="fiterAndSortContainer" class="b_0 br-t_1 br_primary br_solid bg_black-3 fixed font_ui l_0 t_0 p-x_0:md p_4 p_0:md print-display_none r_0 relative:md display_none block:md" style="z-index:1000">
-			<div class="bg_white p_4 flex">
-				<div id="Sort" class="flex_auto p-r_4">
-				<span class="uppercase c_secondary font_bold font_n2 m-x_2">Sort</span>
-				<ul class="flex flex_column flex_row:md font_bold font_n2 font_ui ul_none">
-					<li
-						class="flex_shrink"
-						:class="{'is-active': selectedSort =='Date'}"
-						@click="selectedSort ='Date'"
-					>
-						<span
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Date</span>
-					</li>
-					<li
-						class="flex_shrink"
-						:class="{'is-active': selectedSort =='Activity'}"
-						@click="selectedSort ='Activity'"
-					>
-						<span
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Activity</span>
-					</li>
-					<li
-						class="flex_shrink"
-						:class="{'is-active': selectedSort =='Product'}"
-						@click="selectedSort ='Product'"
-					>
-						<span
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Product</span>
-					</li>
-					<li
-						class="flex_shrink"
-						:class="{'is-active': selectedSort =='Type'}"
-						@click="selectedSort ='Type'"
-					>
-						<span
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Type</span>
-					</li>
-					<li
-						class="flex_shrink"
-						:class="{'is-active': selectedSort =='Claimed'}"
-						@click="selectedSort ='Claimed'"
-					>
-						<span
-							class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
-						>Claimed</span>
-					</li>
-				</ul>
-			</div>
-			<filterCreditType
+			<div class="bg_white p-y_4:md p-x_0:md p_4 flex">
+			<sortBar 
+				:sortTypes="sortTypes"
+				:selectedSort="selectedSort"
+				v-on:updateselectedsort="selectedSort = $event"
+			></sortBar>
+			<filterCreditTypeBar
 				:creditTypes="creditTypes"
 				:creditsInList="creditsInList"
 				v-on:updatefitler="selectedCreditFilter = $event"
-			></filterCreditType>
+			></filterCreditTypeBar>
 			</div>
 		</div>
 		<div id="summaryView" class="bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
@@ -196,7 +151,9 @@
 
 <script>
 import transcriptItem from "./components/transcriptItem.vue";
-import filterCreditType from "./components/filterCreditType.vue";
+import filterCreditTypeBar from "./components/filterCreditTypeBar.vue";
+
+import sortBar from "./components/sortBar.vue";
 import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
@@ -206,14 +163,15 @@ export default {
 			filterStartDate: "2018-01-01",
 			filterEndDate: "",
 			selectedCreditFilter: ["All"],
-			sortType: [],
+			sortTypes: ["Date","Activity","Product","Amount"],
 			selectedSort: "Date"
 		};
 	},
 	props: {},
 	components: {
 		transcriptItem,
-		filterCreditType
+		filterCreditTypeBar,
+		sortBar
 	},
 	computed: {
 		...mapState(["transcript", "creditTypes"]),
@@ -248,6 +206,8 @@ export default {
 			return creditCount;
 		},
 		creditsInList: function() {
+			const creditArray = this.creditTypes.map( credit => credit.styleCode);
+			console.log(creditArray);
 			var arr = ["CME"];
 			var list = this.transcript;
 			for (const key in list) {
@@ -266,35 +226,15 @@ export default {
 
 			return arr;
 		},
+		// creditsFilteredList: (credit)=>(this.selectedCreditFilter.indexOf(element) != -1 || this.selectedCreditFilter.length == 1),
 		creditsFilteredList: function() {
-			var arr = this.creditsInList,
-				newArr = [];
-			for (let i = 0; i < arr.length; i++) {
-				const element = arr[i];
-				if (
-					this.selectedCreditFilter.indexOf(element) != -1 ||
-					this.selectedCreditFilter.length == 1
-				) {
-					newArr.push(element);
-				}
-			}
+			var newArr = this.creditsInList.filter(credit => (this.selectedCreditFilter.indexOf(credit) != -1 ||
+					this.selectedCreditFilter.length == 1) );
 			return newArr;
 		},
 		transcriptFiltered: function() {
-			var arr = [];
-			this.transcript.forEach(element => {
-				var inDate = this.isDateInFilter(element.DateClaimed);
-				var inCreditFilter = false;
-				element.Credits.forEach(credit => {
-					if (this.isCreditTypeInFilter(credit.Type)) {
-						inCreditFilter = true;
-					}
-				});
-				if (inDate && inCreditFilter) {
-					arr.push(element);
-				}
-			});
-
+			var arr =	this.transcript.filter( activity=> (  this.isDateInFilter(activity.DateClaimed)  &&  activity.Credits.some(credit => this.isCreditTypeInFilter(credit.Type))  ));
+	
 			return arr.sort(this.compare);
 		}
 	},
@@ -334,6 +274,9 @@ export default {
 				this.selectedCreditFilter.indexOf(credit) != -1 ||
 				this.selectedCreditFilter.length() == 1;
 			return bool;
+		},
+		creditTemp:() => {
+			
 		},
 		isCreditTypeInFilter: function(type) {
 			return this.creditsFilteredList.indexOf(type) !== -1 ? true : false;
