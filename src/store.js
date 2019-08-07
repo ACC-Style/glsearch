@@ -60,11 +60,11 @@ export default new Vuex.Store({
 			"ID": 1,
 			"ProductTitle": "Heart Songs",
 			"Course": null,
-			"Activity": "The Society of Cardiovascular Patient Care (SCPC) is now called ACC Accreditation Services",
+			"Activity": "The Society of Cardiovascular Patient Care (SCPC) is now called ACC Accreditation ServiCPEs",
 			"DateCompleted": "4/4/2018",
 			"DateClaimed": "11/25/2018",
 			"Credits": [{
-				"Type": "CE",
+				"Type": "CPE",
 				"Amount": 19.2
 			}],
 			"External": false
@@ -112,7 +112,7 @@ export default new Vuex.Store({
 			"DateCompleted": "10/18/2018",
 			"DateClaimed": "11/24/2017",
 			"Credits": [{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 20.1
 				},
 				{
@@ -238,7 +238,7 @@ export default new Vuex.Store({
 			"DateCompleted": "9/19/2018",
 			"DateClaimed": "4/12/2019",
 			"Credits": [{
-				"Type": "CE",
+				"Type": "CPE",
 				"Amount": 1.7
 			}],
 			"External": false
@@ -313,7 +313,7 @@ export default new Vuex.Store({
 			"DateCompleted": "5/30/2018",
 			"DateClaimed": "4/25/2019",
 			"Credits": [{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 6.5
 				},
 				{
@@ -370,7 +370,7 @@ export default new Vuex.Store({
 					"Amount": 17.2
 				},
 				{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 10.6
 				}
 			],
@@ -387,7 +387,7 @@ export default new Vuex.Store({
 					"Amount": 18.5
 				},
 				{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 6.2
 				}
 			],
@@ -518,7 +518,7 @@ export default new Vuex.Store({
 			"DateCompleted": "5/2/2017",
 			"DateClaimed": "3/4/2017",
 			"Credits": [{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 18.4
 				},
 				{
@@ -585,7 +585,7 @@ export default new Vuex.Store({
 					"Amount": 23.6
 				},
 				{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 1.7
 				}
 			],
@@ -850,7 +850,7 @@ export default new Vuex.Store({
 			"DateCompleted": "4/15/2016",
 			"DateClaimed": "5/2/2017",
 			"Credits": [{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 7.9
 				},
 				{
@@ -941,7 +941,7 @@ export default new Vuex.Store({
 					"Amount": 1.8
 				},
 				{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 3.2
 				}
 			],
@@ -971,7 +971,7 @@ export default new Vuex.Store({
 			"DateCompleted": "12/4/2016",
 			"DateClaimed": "4/21/2017",
 			"Credits": [{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 19.7
 				},
 				{
@@ -1004,7 +1004,7 @@ export default new Vuex.Store({
 					"Amount": 20.3
 				},
 				{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 17.5
 				}
 			],
@@ -1092,7 +1092,7 @@ export default new Vuex.Store({
 			"DateCompleted": "6/26/2019",
 			"DateClaimed": "6/16/2016",
 			"Credits": [{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 4.2
 				},
 				{
@@ -1373,7 +1373,7 @@ export default new Vuex.Store({
 			"DateCompleted": "9/11/2017",
 			"DateClaimed": "4/16/2017",
 			"Credits": [{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 2.9
 				},
 				{
@@ -1402,7 +1402,7 @@ export default new Vuex.Store({
 			"DateCompleted": "1/30/2019",
 			"DateClaimed": "1/31/2017",
 			"Credits": [{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 9.6
 				},
 				{
@@ -1476,7 +1476,7 @@ export default new Vuex.Store({
 					"Amount": 15.3
 				},
 				{
-					"Type": "CE",
+					"Type": "CPE",
 					"Amount": 9.9
 				}
 			],
@@ -1506,7 +1506,7 @@ export default new Vuex.Store({
 			"DateCompleted": "10/13/2018",
 			"DateClaimed": "7/29/2016",
 			"Credits": [{
-				"Type": "CE",
+				"Type": "CPE",
 				"Amount": 2.1
 			}],
 			"External": false
@@ -1542,7 +1542,7 @@ export default new Vuex.Store({
 			"DateCompleted": "12/22/2018",
 			"DateClaimed": "6/25/2016",
 			"Credits": [{
-				"Type": "CE",
+				"Type": "CPE",
 				"Amount": 10.0
 			}],
 			"External": true

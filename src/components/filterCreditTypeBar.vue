@@ -1,24 +1,25 @@
 <template>
-	<div id="CreditType" class="text_right flex_end flex_auto p-l_4">
+	<div id="CreditType" class="text_right:md flex_end flex_auto p-l_4:md p-l_0 p-t_3 p-t_0:md">
 		<span class="uppercase c_secondary font_bold font_n2 m-x_2">
 			Filter Credit Types
 			<i class="fas fa-question-circle"></i>
 		</span>
-		<ul class="flex flex_column flex_row-reverse:md text_left font_bold font_n2 font_ui ul_none">
-			<li class="flex_shrink" :class="{'is-active': selectedFilter.length == 1}">
+		<ul class="flex flex_row flex_wrap flex_nowrap:md flex_row-reverse:md text_left font_bold font_n2 font_ui ul_none">
+			<li class="flex_shrink:md flex_auto flex_shrink w_100 w_auto:md" :class="{'is-active': selectedFilter.length == 1}">
 				<div
 					@click="filterReset()"
-					class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 br_1 br_solid br_white-7 block a:bg_primary a:c_white"
+					class="button bg_primary-4 
+					p-x_3 p-x_4:lg p-y_3 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_primary-n2 block a:bg_primary a:c_white br_solid "
 				>All</div>
 			</li>
 			<li
-				class="flex_shrink br_1 br_solid br_white-7"
+				class="flex_shrink w_50 w_auto:md br_1 br_solid br_white-7 "
 				v-for="(credit, index) in creditUsed"
 				v-bind:key="index+'creditFilter'"
 			>
 				<div
 					@click="filterClick(credit.styleCode)"
-					class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_2 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3 block a:bg_primary a:c_white"
+					class="button bg_secondary-3 p-x_3 p-x_4:lg p-y_3 p-y_3:lg undecorated inline-block:md h:bg_secondary h:c_white c_secondary-n3  block a:bg_primary a:c_white"
 					:class="{['c_white bg_'+credit.styleCode]: selectedFilter.indexOf(credit.styleCode) != -1}"
 				>
 					<span class="lh_0" v-html="credit.shortName"></span>

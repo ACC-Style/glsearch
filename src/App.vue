@@ -1,9 +1,7 @@
 <template>
-	<div id="app" class="p_4 viewport">
+	<div id="app" class="p_4 viewport z_0">
 		<header id="transcript_header" class="relative">
-			<h1
-				class=" font_display lh_0 m_0 relative p-t_4 p-b_2 text_center text_left:md"
-			>
+			<h1 class="font_display lh_0 m_0 relative p-t_4 p-b_2 text_center text_left:md">
 				My Transcript
 				<span
 					class="print-display_none c_secondary-2 font_n1 inline-block m-b_2 vertical-align_middle w_100"
@@ -33,29 +31,41 @@
 						class="bg_secondary-3 br-b_1 br_secondary-3 br_solid fa-calendar fas font_n1 p-l_3 p-r_3 p-t_3 p_3 vertical-align_bottom"
 					></i>
 				</div>
-				<a
-					href
+				<div
 					class="button bg_primary text_center font_n1:md br_radius p-y_3 m-b_3 p-x_4 block inline-block:md m-t_3 m-t_0:md c_white undecorated h:bg_secondary h:c_white"
 				>
 					<i class="fas fa-plus m-r_3"></i> Add Non ACC Activity
-				</a>
+				</div>
 			</div>
 		</header>
-		<div id="fiterAndSortContainer" class="b_0 br-t_1 br_primary br_solid bg_black-3 fixed font_ui l_0 t_0 p-x_0:md p_4 p_0:md print-display_none r_0 relative:md display_none block:md" style="z-index:1000">
-			<div class="bg_white p-y_4:md p-x_0:md p_4 flex">
-			<sortBar 
-				:sortTypes="sortTypes"
-				:selectedSort="selectedSort"
-				v-on:updateselectedsort="selectedSort = $event"
-			></sortBar>
-			<filterCreditTypeBar
-				:creditTypes="creditTypes"
-				:creditsInList="creditsInList"
-				v-on:updatefitler="selectedCreditFilter = $event"
-			></filterCreditTypeBar>
+
+		<div
+			id="fiterAndSortContainer"
+			class="z_5 b_0 br-t_1 br_primary br_solid bg_black-6 fixed font_ui l_0 t_0 p-x_0:md p_4 p_0:md print-display_none r_0 relative:md block:md"
+			:class="{'display_none': !sortFilterBarShowSmall}"
+		>
+			<div class="bg_white p-y_4:md p-x_0:md p_4 flex flex_column flex_row:md">
+				<sortBar
+					:sortTypes="sortTypes"
+					:selectedSort="selectedSort"
+					v-on:updateselectedsort="selectedSort = $event"
+				></sortBar>
+				<filterCreditTypeBar
+					:creditTypes="creditTypes"
+					:creditsInList="creditsInList"
+					v-on:updatefitler="selectedCreditFilter = $event"
+				></filterCreditTypeBar>
+			<div class="flex_grow w_100 text_center block w_100 display_none:md m-t_3" v-if="sortFilterBarShowSmall">
+				<div
+					class="button bg_secondary text_center inline-block font_n2 br_solid br_2 br_black-3 shadow_1 font_bold font_ui m_auto br_radius p-y_2 p-x_5 c_white-7 undecorated h:bg_secondary h:c_white"
+					v-on:click="sortFilterBarShowSmallToggle()"
+				>
+					<i class="fas fa-filter m-r_3"></i>Close Filter/Sort
+				</div>
+			</div>
 			</div>
 		</div>
-		<div id="summaryView" class="bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
+		<div id="summaryView" class="z_0 bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
 			<div
 				class="flex bg_secondary-2 font_n2 font_n1:md c_white p_2 p-x_4 font_bold print-display_none"
 			>
@@ -119,7 +129,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="m-x_n4 m-x_n2:md m-x_0">
+		<div class="z_0 m-x_n4 m-x_n2:md m-x_0">
 			<transition-group tag="div" name="crossFade">
 				<transcriptItem
 					v-for="(activity) in transcriptFiltered"
@@ -139,6 +149,17 @@
 				href
 				class="transition_1 button br_radius font_bold inline-block br_solid br_2 br_white-8 c_white-8 undecorated p-x_4 p-y_3 h:bg_white-8 h:c_primary h:br_white m-x_3"
 			>Load All Activities</a>
+		</div>
+		<div
+			class="z_5 b_3 l_0 r_0 text_center fixed block w_100 display_none:md"
+			v-if="!sortFilterBarShowSmall"
+		>
+			<div
+				class="button bg_primary text_center inline-block font_n1 br_solid br_2 br_black-3 shadow_4 font_bold font_display m_auto br_round p-y_2 p-x_5 c_white-9 undecorated h:bg_secondary h:c_white"
+				v-on:click="sortFilterBarShowSmallToggle()"
+			>
+				<i class="fas fa-filter m-r_3"></i> Filter/Sort
+			</div>
 		</div>
 		<div id="foooter" class="bg_secondary-4 p_5 m-x_n4 m-b_n4">
 			<ol class="font_n2 c_secondary lh_2">
@@ -163,8 +184,9 @@ export default {
 			filterStartDate: "2018-01-01",
 			filterEndDate: "",
 			selectedCreditFilter: ["All"],
-			sortTypes: ["Date","Activity","Product","Amount"],
-			selectedSort: "Date"
+			sortTypes: ["Date", "Activity", "Product", "Amount"],
+			selectedSort: "Date",
+			sortFilterBarShowSmall: false
 		};
 	},
 	props: {},
@@ -206,47 +228,51 @@ export default {
 			return creditCount;
 		},
 		creditsInList: function() {
-			const creditArray = this.creditTypes.map( credit => credit.styleCode);
-			console.log(creditArray);
-			var arr = ["CME"];
-			var list = this.transcript;
-			for (const key in list) {
-				if (list.hasOwnProperty(key)) {
-					const item = list[key]["Credits"];
-					for (const credit in item) {
-						if (item.hasOwnProperty(credit)) {
-							const type = item[credit]["Type"];
-							if (arr.indexOf(type) === -1) {
-								arr.push(type);
-							}
-						}
-					}
-				}
-			}
-
-			return arr;
+			const creditIN = this.transcript
+				.flatMap(activity => {
+					let Credit = activity.Credits;
+					return Credit.flatMap(credit => {
+						return credit.Type;
+					});
+				})
+				.filter((value, index, self) => self.indexOf(value) === index);
+			return creditIN;
 		},
 		// creditsFilteredList: (credit)=>(this.selectedCreditFilter.indexOf(element) != -1 || this.selectedCreditFilter.length == 1),
 		creditsFilteredList: function() {
-			var newArr = this.creditsInList.filter(credit => (this.selectedCreditFilter.indexOf(credit) != -1 ||
-					this.selectedCreditFilter.length == 1) );
+			var newArr = this.creditsInList.filter(
+				credit =>
+					this.selectedCreditFilter.indexOf(credit) != -1 ||
+					this.selectedCreditFilter.length == 1
+			);
 			return newArr;
 		},
 		transcriptFiltered: function() {
-			var arr =	this.transcript.filter( activity=> (  this.isDateInFilter(activity.DateClaimed)  &&  activity.Credits.some(credit => this.isCreditTypeInFilter(credit.Type))  ));
-	
+			var arr = this.transcript.filter(
+				activity =>
+					this.isDateInFilter(activity.DateClaimed) &&
+					activity.Credits.some(credit =>
+						this.isCreditTypeInFilter(credit.Type)
+					)
+			);
+
 			return arr.sort(this.compare);
 		}
 	},
 	methods: {
 		...mapMutations([]),
 		...mapActions([]),
+		sortFilterBarShowSmallToggle: function() {
+			this.sortFilterBarShowSmall = !this.sortFilterBarShowSmall;
+		},
 		compare: function(a, b) {
 			let comparison = 0;
 			switch (this.selectedSort) {
 				case "Date":
 					comparison =
-						new Date(a.DateClaimed) >= new Date(b.DateClaimed) ? -1 : 1;
+						new Date(a.DateClaimed) >= new Date(b.DateClaimed)
+							? -1
+							: 1;
 					break;
 				case "Activity":
 					comparison = a.Activity <= b.Activity ? -1 : 1;
@@ -262,11 +288,13 @@ export default {
 		},
 		creditCounterDecorator: function(credit, count) {
 			var classCode = "bg_" + credit + " c_white";
+			if (count == 1) classCode = classCode + " p-y_4";
 			if (count < 3) classCode = classCode + " font_2";
 			if (count == 3) classCode = classCode + " font_1";
 			if (count == 4) classCode = classCode + " font_0";
 			if (count > 4)
-				classCode = classCode + " w_50 br_solid br_white-5 br_1 font_n1";
+				classCode =
+					classCode + " w_50 br_solid br_white-5 br_1 font_n1";
 			return classCode;
 		},
 		creditBoolean: function(credit) {
@@ -275,9 +303,7 @@ export default {
 				this.selectedCreditFilter.length() == 1;
 			return bool;
 		},
-		creditTemp:() => {
-			
-		},
+		creditTemp: () => {},
 		isCreditTypeInFilter: function(type) {
 			return this.creditsFilteredList.indexOf(type) !== -1 ? true : false;
 		},
@@ -289,7 +315,9 @@ export default {
 					? new Date("1970-01-01")
 					: new Date(this.filterStartDate);
 			end =
-				this.filterEndDate == "" ? new Date() : new Date(this.filterEndDate);
+				this.filterEndDate == ""
+					? new Date()
+					: new Date(this.filterEndDate);
 
 			return start <= activityDate && activityDate <= end ? true : false;
 		}
@@ -317,15 +345,23 @@ export default {
 .crossFade-move {
 	transition: 0.5s ease;
 }
-@media only screen and (max-width: 1024px)
-{
-	.sm_button {
-    padding:.35rem 1rem;
-	border-radius: .3333333333rem;
-	background-color: #dedee0!important;
-	color:black !important;
-	display:inline-block;
+.z_0 {
+	z-index: -1;
 }
+.z_1 {
+	z-index: 1;
+}
+.z_5 {
+	z-index: 10000;
+}
+@media only screen and (max-width: 1024px) {
+	.sm_button {
+		padding: 0.35rem 1rem;
+		border-radius: 0.3333333333rem;
+		background-color: #dedee0 !important;
+		color: black !important;
+		display: inline-block;
+	}
 }
 @media print {
 	.print-display_none {
