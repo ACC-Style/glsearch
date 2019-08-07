@@ -1,6 +1,6 @@
 <template>
 	<div id="CreditType" class="text_right:md flex_end flex_auto p-l_4:md p-l_0 p-t_3 p-t_0:md">
-		<span class="uppercase c_secondary font_bold font_n2 m-x_2">
+		<span class="uppercase c_secondary font_bold font_n2 m-x_2" @click="$emit('showModalEvent')" >
 			Filter Credit Types
 			<i class="fas fa-question-circle"></i>
 		</span>
