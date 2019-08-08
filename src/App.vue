@@ -54,7 +54,7 @@
 					:creditTypes="creditTypes"
 					:creditsInList="creditsInList"
 					v-on:updatefitler="selectedCreditFilter = $event"
-					v-on:showModalEvent="showModal=true"
+					v-on:showModal_LegendEvent="showModal_Legend=true"
 				></filterCreditTypeBar>
 			<div class="flex_grow w_100 text_center block w_100 display_none:md m-t_3" v-if="sortFilterBarShowSmall">
 				<div
@@ -168,7 +168,7 @@
 				<li>The American College of Cardiology Foundation (ACCF) is accredited as a provider of continuing education by the American Nurses Credentialing Center's Commission on Accreditation.</li>
 			</ol>
 		</div>
-	<modal v-if="showModal" @close="showModal = false">
+			<modal v-if="showModal_Legend" @close="showModal_Legend = false">
 		 <h3 slot="header" class="">Credit Type Legend
 			 
 		 </h3>
@@ -181,7 +181,24 @@
 					 </div></li>
 			 </ul>
 		</div> 
-		<div slot="footer" class="text_right"><button class="font_ui bg_secondary h:bg_secondary-n2 c_white br_none br_radius p-x_4 p-y_2 text_center inline-block font_0" @click="showModal = false">
+		<div slot="footer" class="text_right"><button class="font_ui bg_secondary h:bg_secondary-n2 c_white br_none br_radius p-x_4 p-y_2 text_center inline-block font_0" @click="showModal_Legend = false">
+               Close Legend
+              </button></div>
+	</modal>
+	<modal id="Legend" v-if="showModal_Legend" @close="showModal_Legend = false">
+		 <h3 slot="header" class="">Credit Type Legend
+			 
+		 </h3>
+		 <div slot="body" >
+			 <ul class="ul_none m-b_4 lh_4">
+				 <li class="flex flex_row flex_nowrap" v-for="(credit, index) in creditTypes" v-bind:key="'legendkey_'+index">
+					 <div class="flex_shrink br_1 br_white-2 br_solid w_30 c_white p-x_3 p-y_2 text_center font_bold" :class="['bg_'+credit.styleCode]" v-html="credit.shortName"></div>
+					 <div class="flex_auto  p-x_3 p-y_2 br-t_1 br-r_1 br-b_1 br_solid br_black-2">
+						 <p class="font_0 c_secondary-n4 " v-html="credit.fullName"></p>
+					 </div></li>
+			 </ul>
+		</div> 
+		<div slot="footer" class="text_right"><button class="font_ui bg_secondary h:bg_secondary-n2 c_white br_none br_radius p-x_4 p-y_2 text_center inline-block font_0" @click="showModal_Legend = false">
                Close Legend
               </button></div>
 	</modal>
@@ -206,7 +223,7 @@ export default {
 			sortTypes: ["Date", "Activity", "Product", "Amount"],
 			selectedSort: "Date",
 			sortFilterBarShowSmall: false,
-			showModal:false
+			showModal_Legend:false
 		};
 	},
 	props: {},
