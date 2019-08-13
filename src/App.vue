@@ -1,214 +1,84 @@
 <template>
-	<div id="app" class="p_4 viewport z_0">
-		<header id="transcript_header" class="relative">
-			<h1 class="font_display lh_0 m_0 relative p-t_4 p-b_2 text_center text_left:md">
-				My Transcript
-				<span
-					class="print-display_none c_secondary-2 font_n1 inline-block m-b_2 vertical-align_middle w_100"
-				>
-					Total Credits in Transcript:
-					<span>{{fullCreditCount}}</span>
-				</span>
-			</h1>
-			<div class="absolute:md t_0 r_0 b_0 text_center text_right:md font_ui print-display_none">
-				<div id="dateRange" class="font_0:md font_n1 m-y_2 c_secondary m-b_3:md">
-					<span class="block inline:md m-b_2 m-b_0:md">Date Claimed:</span>
-					<input
-						type="date"
-						class="lh_0 p_2 font_0 text_center br_solid br_secondary-3 br_1"
-						name
-						id
-						v-model="filterStartDate"
-					/> -
-					<input
-						type="date"
-						class="lh_0 p_2 font_0 text_center br_solid br_secondary-3 br_1"
-						name
-						id
-						v-model="filterEndDate"
-					/>
-					<i
-						class="bg_secondary-3 br-b_1 br_secondary-3 br_solid fa-calendar fas font_n1 p-l_3 p-r_3 p-t_3 p_3 vertical-align_bottom"
-					></i>
-				</div>
-				<div
-					class="button bg_primary text_center font_n1:md br_radius p-y_3 m-b_3 p-x_4 block inline-block:md m-t_3 m-t_0:md c_white undecorated h:bg_secondary h:c_white"
-				>
-					<i class="fas fa-plus m-r_3"></i> Add Non ACC Activity
-				</div>
-			</div>
-		</header>
+	<div id="app" class="p_4 texture_light">
+		<article class="bg_white shadow_1 br-t_3 br_solid br_secondary relative">
+         <a class="absolute t_0 r_0 bg_secondary c_white-4 h:c_white p_2 font_n2 p-x_3"><i class="fa fa-expand font_n1 lh_1"></i></a>
+    		<header class="m-t_3 p-b_0 p-t_3 p-x_4 block" id="item-header-0">
+             <h2 class="c_acc font_1 font_slab lh_1 m-t_3 overflow-ellipsis">Recommendations for Anticoagulation for Atrial Fibrillation (AF) in Patients With VHD</h2>
+           <div class="font_ui font_n1"><span class="font_italic c_secondary-3 font_n1 display_none"> EID: #1-s2.0-S0735109717360199 ["hl0000348"] Type: table </span>
+           <span class="font_bold">Focused Update: </span>Jul 10, 2017 
+		  </div>
+    </header>
+	<section class="m-b_1 m_0 p-x_4 p-y_2 result-content">
 
-		<div
-			id="fiterAndSortContainer"
-			class="z_5 b_0 br-t_1 br_primary br_solid bg_black-6 fixed font_ui l_0 t_0 p-x_0:md p_4 p_0:md print-display_none r_0 relative:md block:md"
-			:class="{'display_none': !sortFilterBarShowSmall}"
-		>
-			<div class="bg_white p-y_4:md p-x_0:md p_4 flex flex_column flex_row:md">
-				<sortBar
-					:sortTypes="sortTypes"
-					:selectedSort="selectedSort"
-					v-on:updateselectedsort="selectedSort = $event"
-				></sortBar>
-				<filterCreditTypeBar
-					:creditTypes="creditTypes"
-					:creditsInList="creditsInList"
-					v-on:updatefitler="selectedCreditFilter = $event"
-					v-on:showModal_LegendEvent="showModal_Legend=true"
-				></filterCreditTypeBar>
-			<div class="flex_grow w_100 text_center block w_100 display_none:md m-t_3" v-if="sortFilterBarShowSmall">
-				<div
-					class="button bg_secondary text_center inline-block font_n2 br_solid br_2 br_black-3 shadow_1 font_bold font_ui m_auto br_radius p-y_2 p-x_5 c_white-7 undecorated h:bg_secondary h:c_white"
-					v-on:click="sortFilterBarShowSmallToggle()"
-				>
-					<i class="fas fa-filter m-r_3"></i>Close Filter/Sort
-				</div>
-			</div>
-			</div>
-		</div>
-		<div id="summaryView" class="z_0 bg_secondary-5 m-b_4 font_ui m-x_n4 m-x_3:md m-x_0:lg">
-			<div
-				class="flex bg_secondary-2 font_n2 font_n1:md c_white p_2 p-x_4 font_bold print-display_none"
-			>
-				<div class="flex_auto uppercase">list summary</div>
-				<div class="flex_shrink p-l_4 uppercase">
-					<span class="c_secondary-n3 m-l_3">
-						<span class="p-r_3">Filtered:</span>
+    <div ng-show="showspinner">
+        <div class="text_center"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
+    </div>
+    <div ng-if="data.html" class="retrieve-content ng-scope table">
+       
+        <div gl-item-container="" label="data.sectiontitle[data.sectiontitle.length-1]" doc="data.gltitle" data="data.html" eid="data.eid" id="glcontentid-resultcontent-0" containerheight="iscontentheight" ng-class="{'gl-contentcollapse':!data.refimage &amp;&amp; iscontentheight>153  &amp;&amp; defaultcollapse==='true'}" class="ng-isolate-scope gl-contentcollapse"><div id="undtbl2" class="table ng-scope"><div class="inline-table-caption">Recommendations for Anticoagulation for Atrial Fibrillation (AF) in Patients With VHD</div><div><table id="hl0000351"><thead><tr><th id="hl0000358" scope="col" class="table-align-">COR</th><th id="hl0000359" scope="col" class="table-align-">LOE</th><th id="hl0000360" scope="col" class="table-align-">Recommendations</th><th id="hl0000361" scope="col" class="table-align-">Comment/Rationale</th></tr></thead><tbody><tr><td id="hl0000364" class="table-align-"><b>I</b></td><td id="hl0000366" class="table-align-"><b>B-NR</b></td><td id="hl0000368" class="table-align-" rowspan="2"><b>Anticoagulation with a vitamin K antagonist (VKA) is indicated for patients with rheumatic mitral stenosis (MS) and AF</b><a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib34" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)"><b>(34</b></a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib35" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)"><b>35)</b></a><b>.</b></td><td id="hl0000373" class="table-align-" rowspan="2"><b>MODIFIED:</b> VKA as opposed to the direct oral anticoagulants (DOACs) are indicated in patients with AF and rheumatic MS to prevent thromboembolic events. The RCTs of DOACs versus VKA have not included patients with MS. The specific recommendation for anticoagulation of patients with MS is contained in a subsection of the topic on anticoagulation (previously in Section 6.2.2). </td></tr><tr><td id="hl0000376" class="table-align-" colspan="2">See <a id="hl0000377" href="http://jaccjacc.acc.org/Clinical_Document/2017_VHD_Focused_Update_Data_Supplement.pdf" target="_blank">Online Data Supplements 3 and 4</a>. </td></tr><tr><td id="hl0000379" class="table-align-" colspan="4">A retrospective analysis of administrative claims databases (&gt;20,000 DOAC-treated patients) showed no difference in the incidence of stroke or major bleeding in patients with rheumatic and nonrheumatic MS if treated with DOAC versus warfarin <a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib35" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">(35)</a>. However, the writing group continues to recommend the use of VKA for patients with rheumatic MS until further evidence emerges on the efficacy of DOAC in this population. (See Section 6.2.2 on Medical Management of Mitral Stenosis in the 2014 guideline.) </td></tr><tr><td id="hl0000382" class="table-align-"><b>I</b></td><td id="hl0000384" class="table-align-"><b>C-LD</b></td><td id="hl0000386" class="table-align-" rowspan="2"><b>Anticoagulation is indicated in patients with AF and a CHA</b><sub>2</sub><b>DS</b><sub>2</sub><b>-VASc score of 2 or greater with native aortic valve disease, tricuspid valve disease, or MR</b><a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib36" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)"><b>36</b></a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib37" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)"><b>37</b></a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib38" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)"><b>38</b></a><b>.</b></td><td id="hl0000395" class="table-align-" rowspan="2"><b>NEW:</b> Post hoc subgroup analyses of large RCTs comparing DOAC versus warfarin in patients with AF have analyzed patients with native valve disease other than MS and patients who have undergone cardiac surgery. These analyses consistently demonstrated that the risk of stroke is similar to or higher than that of patients without VHD. Thus, the indication for anticoagulation in these patients should follow GDMT according to the CHA <sub>2</sub>DS <sub>2</sub>-VASc score <a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib35" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">35</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib36" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">36</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib37" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">37</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib38" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">38</a>. </td></tr><tr><td id="hl0000401" class="table-align-" colspan="2">See <a id="hl0000402" href="http://jaccjacc.acc.org/Clinical_Document/2017_VHD_Focused_Update_Data_Supplement.pdf" target="_blank">Online Data Supplements 3 and 4</a>. </td></tr><tr><td id="hl0000404" class="table-align-" colspan="4">Many patients with VHD have AF, yet these patients were not included in the original studies evaluating the risk of stroke or in the development of the risk schema such as CHADS <sub>2</sub> or CHA <sub>2</sub>DS <sub>2</sub>-VASc <a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib39" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">(39</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib40" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">40)</a>. Post hoc subgroup analyses of large RCTs comparing apixaban, rivaroxaban, and dabigatran (DOACs) versus warfarin <a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib36" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">36</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib37" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">37</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib38" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">38</a> included patients with VHD, and some included those with bioprosthetic valves or those undergoing valvuloplasty. Although the criteria for nonvalvular AF differed for each trial, patients with significant MS and valve disease requiring an intervention were excluded. There is no clear evidence that the presence of native VHD other than rheumatic MS need be considered in the decision to anticoagulate a patient with AF. On the basis of these findings, the writing group supports the use of anticoagulation in patients with VHD and AF when their CHA <sub>2</sub>DS <sub>2</sub>-VASc score is 2 or greater. Patients with a bioprosthetic valve or mitral repair and AF are at higher risk for embolic events and should undergo anticoagulation irrespective of the CHA <sub>2</sub>DS <sub>2</sub>-VASc score. </td></tr><tr><td id="hl0000415" class="table-align-"><b>IIa</b></td><td id="hl0000417" class="table-align-"><b>C-LD</b></td><td id="hl0000419" class="table-align-" rowspan="2"><b>It is reasonable to use a DOAC as an alternative to a VKA in patients with AF and native aortic valve disease, tricuspid valve disease, or MR and a CHA <sub>2</sub>DS <sub>2</sub>-VASc score of 2 or greater </b><a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib35" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)"><b>35</b></a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib36" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)"><b>36</b></a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib37" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)"><b>37</b></a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib38" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)"><b>38</b></a><b>.</b></td><td id="hl0000426" class="table-align-" rowspan="2"><b>NEW:</b> Several thousand patients with native VHD (exclusive of more than mild rheumatic MS) have been evaluated in RCTs comparing DOACs versus warfarin. Subgroup analyses have demonstrated that DOACs, when compared with warfarin, appear as effective and safe in patients with VHD as in those without VHD. </td></tr><tr><td id="hl0000429" class="table-align-" colspan="2">See <a id="hl0000430" href="http://jaccjacc.acc.org/Clinical_Document/2017_VHD_Focused_Update_Data_Supplement.pdf" target="_blank">Online Data Supplements 3 and 4</a>. </td></tr><tr><td id="hl0000432" class="table-align-" colspan="4">DOACs appear to be as effective and safe in patients with VHD as they are in those without VHD. In the ROCKET-AF (Rivaroxaban Once Daily Oral Direct Factor Xa Inhibition Compared With Vitamin K Antagonist for Prevention of Stroke and Embolism Trial in Atrial Fibrillation), ARISTOTLE (Apixaban for Reduction in Stroke and Other Thromboembolic Events in Atrial Fibrillation), and RE-LY (Randomized Evaluation of Long-Term Anticoagulant Therapy) trials, 2,003, 4,808, and 3,950 patients, respectively, had significant VHD <a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib36" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">36</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib37" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">37</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib38" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">38</a>. This included MR, mild MS, aortic regurgitation, aortic stenosis (AS), and tricuspid regurgitation. These trials consistently demonstrated at least equivalence to warfarin in reducing stroke and systemic embolism. Retrospective analyses of administrative claims databases (&gt;20,000 DOAC-treated patients) correlate with these findings <a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib35" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">(35)</a>. In addition, the rate of intracranial hemorrhage in each trial was lower among patients randomized to dabigatran, rivaroxaban, or apixaban than among those randomized to warfarin, regardless of the presence of VHD <a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib36" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">36</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib37" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">37</a>,&nbsp;<a class="inline-reference" data-toggle="modal" data-target="#myModal" bibid="bib38" docid="1-s2.0-S0735109717360199" doc-name="Valvular Heart Disease (Focused Update)">38</a>. There is an increased risk of bleeding in patients with VHD versus those without VHD, irrespective of the choice of the anticoagulant. </td></tr></tbody></table></div></div></div>
+        <!-- ngIf: iscontentheight>153 --><div class="m-b_3 m-t_3 ng-scope p-b_3 p-t_0 content-toggle" ng-show="data.refimage ==null" ng-if="iscontentheight>153">
+            <a id="contenttoggle-0" class="ta-center font_n1 br-b_1 br_0 br_primary br_solid display no-underline" ng-click="contenttoggle(defaultcollapse)" item-title="Recommendations for Anticoagulation for Atrial Fibrillation (AF) in Patients With VHD" doc-name="Valvular Heart Disease (Focused Update)">
+                    <span class="block m-b_n3 text_center">
+                        <span class="bg_white p-x_3 font_n1">
+                            <i class="br_secondary-2 br_solid fa m-r_4 p-x_2 p-y_1 fa-angle-down" ng-class="{'fa-angle-down': defaultcollapse ==='true', 'fa-angle-up': defaultcollapse !=='true' }"></i><span class="font_bold c_acc ng-binding">expand content</span>
+                        </span>
+                    </span> 
+            </a>
+        </div><!-- end ngIf: iscontentheight>153 -->
+    </div><!-- end ngIf: data.html -->
+    <div id="myModal" class="modal fade" role="dialog" data-backdrop="true" data-animation="" data-keyboard="false">
+        <div class="modal-dialog" style="margin:auto; padding-top:5em">
+            <!-- Modal content-->
+            <div class="modal-content" style="padding:0.75em">
+                <div class="modal-header">
+                    <button type="button" class="close close-x bg_primary c_white p_2" data-dismiss="modal">×</button>
+                </div>
+                <div id="blibid"></div>
+                <br>
+                <div class="row">
+                        <div class="col-md-12 ta-right">
+                            <button type="button" id="btncopy" class="btn-container" ng-click="copytoclipboard('btncopy','blibid')" data-toggle="tooltip">Copy</button>
+                            <button type="button" class="btn-clear" data-dismiss="modal">Close</button>
+                        </div>
+                    </div> 
+            </div>
+        </div>
+    </div>
 
-						<span class="c_secondary-n3" v-if="filterStartDate != '1949-01-01' || filterEndDate==''">Date</span>
-						<span
-							class="m-x_3"
-							v-if="(selectedCreditFilter.length > 1 && selectedCreditFilter[1] != 'All' ) && (filterStartDate != '1949-01-01' || filterEndDate=='')"
-						>&amp;</span>
-						<span v-if="(selectedCreditFilter.length > 1 && selectedCreditFilter[1] != 'All' )">Credit</span>
-					</span>
-				</div>
-			</div>
-			<div class="flex print-br_black">
-				<div class="flex_auto w_70:md w_60:md p-x_4 p-y_3">
-					<ul class="ul_none lh_3">
-						<li class="font_n2 font_n1:md">
-							<span class="capitalize font_bold c_secondary-1">Date Range</span>
-							<span
-								class="c_secondary-n3 m-l_3 font_bold font_italic"
-								v-if="filterStartDate == '1949-01-01' && filterEndDate==''"
-							>None</span>
-							<span v-else class="c_primary font_bold m-l_3">
-								{{filterStartDate}} to
-								<span v-if="filterEndDate == ''">Today</span>
-								<span v-if="filterEndDate !== ''">{{filterEndDate}}</span>
-							</span>
-						</li>
-					</ul>
-				</div>
-				<div class="flex_shrink:md w_30:lg w_40:lg print-br_black">
-					<div
-						v-if="selectedCreditFilter.length == 1"
-						class="p-x_4 p-y_3 bg_primary c_white text_center lh_0"
-					>
-						<span class="block font_4">{{filteredCreditCount['All']}}</span>
-						<span class="block font_n2 font_bold c_primary-4 uppercase">Credits</span>
-					</div>
-					<div v-else>
-						<transition-group
-							name="crossfade"
-							tag="ul"
-							class="ul_none flex bg_secondary-n1"
-							:class="{'flex_row flex_wrap':creditsFilteredList.length>4,'flex_column ':creditsFilteredList.length<=4}"
-						>
-							<li
-								class="p-x_4 p-y_3 flex lh_0 font_bold print-br_black"
-								v-for="(credit, index) in creditsFilteredList"
-								v-bind:key="index+'_credit'"
-								:class="creditCounterDecorator(credit,creditsFilteredList.length)"
-							>
-								<span class="flex_auto p-r_4">{{credit}}</span>
-								<span class="flex_shrink print-c_black">{{filteredCreditCount[credit]}}</span>
-							</li>
-						</transition-group>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="z_0 m-x_n4 m-x_n2:md m-x_0">
-			<transition-group tag="div" name="crossFade">
-				<transcriptItem
-					v-for="(activity) in transcriptFiltered"
-					v-bind:key="activity.ID+'_activity'"
-					v-bind="activity"
-					:selectedSort="selectedSort"
-					:selectedCreditFilter="selectedCreditFilter"
-				/>
-			</transition-group>
-		</div>
-		<div
-			id="loadMore "
-			class="c_white-8 text_center p-y_3 font_slab br-t_2 br_solid br_primary-1 bg_primary-1 m-x_n4 print-display_none"
-		>
-			Showing First 20 Results
-			<a
-				href
-				class="transition_1 button br_radius font_bold inline-block br_solid br_2 br_white-8 c_white-8 undecorated p-x_4 p-y_3 h:bg_white-8 h:c_primary h:br_white m-x_3"
-			>Load All Activities</a>
-		</div>
-		<div
-			class="z_5 b_3 l_0 r_0 text_center fixed block w_100 display_none:md"
-			v-if="!sortFilterBarShowSmall"
-		>
-			<div
-				class="button bg_primary text_center inline-block font_n1 br_solid br_2 br_black-3 shadow_4 font_bold font_display m_auto br_round p-y_2 p-x_5 c_white-9 undecorated h:bg_secondary h:c_white"
-				v-on:click="sortFilterBarShowSmallToggle()"
-			>
-				<i class="fas fa-filter m-r_3"></i> Filter/Sort
-			</div>
-		</div>
-		<div id="foooter" class="bg_secondary-4 p_5 m-x_n4 m-b_n4">
-			<ol class="font_n2 c_secondary lh_2">
-				<li>The American College of Cardiology Foundation (ACCF) is accredited by the Accreditation Council for Continuing Medical Education to provide continuing medical education for physicians.</li>
-				<li>The American College of Cardiology Foundation (ACCF) is accredited as a provider of continuing education by the American Nurses Credentialing Center's Commission on Accreditation.</li>
-			</ol>
-		</div>
-			<modal v-if="showModal_Legend" @close="showModal_Legend = false">
-		 <h3 slot="header" class="">Credit Type Legend
-			 
-		 </h3>
-		 <div slot="body" >
-			 <ul class="ul_none m-b_4 lh_4">
-				 <li class="flex flex_row flex_nowrap" v-for="(credit, index) in creditTypes" v-bind:key="'legendkey_'+index">
-					 <div class="flex_shrink br_1 br_white-2 br_solid w_30 c_white p-x_3 p-y_2 text_center font_bold" :class="['bg_'+credit.styleCode]" v-html="credit.shortName"></div>
-					 <div class="flex_auto  p-x_3 p-y_2 br-t_1 br-r_1 br-b_1 br_solid br_black-2">
-						 <p class="font_0 c_secondary-n4 " v-html="credit.fullName"></p>
-					 </div></li>
-			 </ul>
-		</div> 
-		<div slot="footer" class="text_right"><button class="font_ui bg_secondary h:bg_secondary-n2 c_white br_none br_radius p-x_4 p-y_2 text_center inline-block font_0" @click="showModal_Legend = false">
-               Close Legend
-              </button></div>
-	</modal>
-	<modal id="Legend" v-if="showModal_Legend" @close="showModal_Legend = false">
-		 <h3 slot="header" class="">Credit Type Legend
-			 
-		 </h3>
-		 <div slot="body" >
-			 <ul class="ul_none m-b_4 lh_4">
-				 <li class="flex flex_row flex_nowrap" v-for="(credit, index) in creditTypes" v-bind:key="'legendkey_'+index">
-					 <div class="flex_shrink br_1 br_white-2 br_solid w_30 c_white p-x_3 p-y_2 text_center font_bold" :class="['bg_'+credit.styleCode]" v-html="credit.shortName"></div>
-					 <div class="flex_auto  p-x_3 p-y_2 br-t_1 br-r_1 br-b_1 br_solid br_black-2">
-						 <p class="font_0 c_secondary-n4 " v-html="credit.fullName"></p>
-					 </div></li>
-			 </ul>
-		</div> 
-		<div slot="footer" class="text_right"><button class="font_ui bg_secondary h:bg_secondary-n2 c_white br_none br_radius p-x_4 p-y_2 text_center inline-block font_0" @click="showModal_Legend = false">
-               Close Legend
-              </button></div>
-	</modal>
-	</div>
+
+            </section>
+
+    <footer class="bg_secondary-5 br-l_0 br-r_0 br_secondary-4 br_solid p-x_4 p-y_2">
+        <div class="auto cell font_1 overflow-ellipsis result-title wrap">
+            <p style="display:none"><span class="font_italic c_secondary-3 font_n1 ng-binding"> DOI: 10.1016/j.jacc.2017.03.011 </span></p>
+            <!-- ngIf: ::data.gltitle --><h4 ng-if="::data.gltitle" class="c_secondary-n2 font_0 font_slab lh_2 ng-binding ng-scope p-b_0 p-t_2">Valvular Heart Disease (Focused Update)</h4><!-- end ngIf: ::data.gltitle -->
+
+            <div class="breadcrumbs">
+                <!-- ngIf: ::data.sectiontitleformatted[1] --><span class="c_secondary-0 font_n2 p-y_2 ng-binding ng-scope" ng-if="::data.sectiontitleformatted[1]" ng-bind-html="::data.sectiontitleformatted[1]"><span>2017 AHA/ACC Focused Update of the 2014 AHA/ACC Guideline for the Management of Patients With Valvular&nbsp;Heart Disease</span></span><!-- end ngIf: ::data.sectiontitleformatted[1] -->
+                <!-- ngIf: ::data.sectiontitleformatted.length-1 > 1 --><span class="c_secondary-0 font_n2 p-y_2 ng-binding ng-scope" ng-if="::data.sectiontitleformatted.length-1 > 1" ng-bind-html="::data.sectiontitleformatted[data.sectiontitleformatted.length-1] "><span>Recommendations for Anticoagulation for Atrial Fibrillation (AF) in Patients With VHD</span></span>
+            </div>
+        </div>
+        <div class="font_n2 c_secondary-2 p-y_1">
+
+        </div>
+        <nav class="flex font_n2 p-y_1">
+            <div class="flex_shirnk m-r_3 ng-scope" ng-if="::data.jacclink"><i class="fa fa-share-square m-r_075"></i><a href="http://www.onlinejacc.org/content/70/2/252" target="_blank" class="link-fulldoc p-y_2 c_primary"><span>JACC</span></a></div>
+           <div class="flex_shirnk m-r_3 ng-scope" ng-if="::data.pdflink"><i class="fa fa-file-pdf-o m-r_075"></i><a href="http://www.onlinejacc.org/content/70/2/252.full.pdf" target="_blank" class="link-pdf p-y_2 c_primary"><span>PDF</span></a></div>
+           <div class="flex_shirnk ng-scope" ng-if="::data.hub"><i class="fa fa-share-alt m-r_075"></i><a href="http://www.acc.org/sitecore/content/sites/acc/home/guidelines/hubs/valvular-heart-disease?gl=1" target="_blank" class="flex_shirnk link-hub p-y_2 c_primary"><span>TOOLS</span></a></div>
+        </nav>
+
+   <div class="bg_secondary-4 gl-item-footer h:bg_secondary-3 h:c_black h:underline p-y_2 p_3">
+     	<div class="font_n2">
+		<i class="fa fa-quote-right"></i> <a ng-click="toClipboard(data.citation)" id="btn-citation-0" data-toggle="tooltip" title="" class="m-x_2 c_black" data-original-title="Copied to clipboard">cite document</a> <span ng-bind="::data.citation" class="c_secondary-1 ng-binding">J Am Coll Cardiol. 2017 Jul 11;70(2):252-289</span>
+	 	</div>
+	 </div>
+
+    </footer>
+
+        </article></div>
 </template>
 
 <script>
-import transcriptItem from "./components/transcriptItem.vue";
-import filterCreditTypeBar from "./components/filterCreditTypeBar.vue";
-import sortBar from "./components/sortBar.vue";
 import modal from "./components/modal.vue";
 
 import { mapState, mapMutations, mapActions } from "vuex";
@@ -216,229 +86,21 @@ import { mapState, mapMutations, mapActions } from "vuex";
 export default {
 	name: "app",
 	data: function() {
-		return {
-			filterStartDate: "2018-01-01",
-			filterEndDate: "",
-			selectedCreditFilter: ["All"],
-			sortTypes: ["Date", "Activity", "Product", "Amount"],
-			selectedSort: "Date",
-			sortFilterBarShowSmall: false,
-			showModal_Legend:false
-		};
+		return {};
 	},
 	props: {},
 	components: {
-		transcriptItem,
-		filterCreditTypeBar,
-		sortBar,
 		modal
 	},
 	computed: {
-		...mapState(["transcript", "creditTypes"]),
-		fullCreditCount: function() {
-			var creditCount = 0;
-			this.transcript.forEach(activity => {
-				activity.Credits.forEach(credit => {
-					creditCount += Number.parseFloat(credit.Amount);
-				});
-			});
-			return creditCount.toFixed(1);
-		},
-
-		filteredCreditCount: function() {
-			var creditCount = {};
-			creditCount["All"] = 0;
-			this.transcriptFiltered.forEach(activity => {
-				activity.Credits.forEach(credit => {
-					creditCount["All"] += credit.Amount * 10;
-					if (!creditCount.hasOwnProperty(credit.Type)) {
-						creditCount[credit.Type] = 0;
-					}
-					creditCount[credit.Type] += credit.Amount * 10;
-				});
-			});
-			for (const key in creditCount) {
-				if (creditCount.hasOwnProperty(key)) {
-					var newVal = creditCount[key] / 10;
-					creditCount[key] = newVal;
-				}
-			}
-			return creditCount;
-		},
-		creditsInList: function() {
-			const creditIN = this.transcript
-				.flatMap(activity => {
-					let Credit = activity.Credits;
-					return Credit.flatMap(credit => {
-						return credit.Type;
-					});
-				})
-				.filter((value, index, self) => self.indexOf(value) === index);
-			return creditIN;
-		},
-		// creditsFilteredList: (credit)=>(this.selectedCreditFilter.indexOf(element) != -1 || this.selectedCreditFilter.length == 1),
-		creditsFilteredList: function() {
-			var newArr = this.creditsInList.filter(
-				credit =>
-					this.selectedCreditFilter.indexOf(credit) != -1 ||
-					this.selectedCreditFilter.length == 1
-			);
-			return newArr;
-		},
-		transcriptFiltered: function() {
-			var arr = this.transcript.filter(
-				activity =>
-					this.isDateInFilter(activity.DateClaimed) &&
-					activity.Credits.some(credit =>
-						this.isCreditTypeInFilter(credit.Type)
-					)
-			);
-
-			return arr.sort(this.compare);
-		}
+		...mapState(["transcript", "creditTypes"])
 	},
 	methods: {
 		...mapMutations([]),
-		...mapActions([]),
-		sortFilterBarShowSmallToggle: function() {
-			this.sortFilterBarShowSmall = !this.sortFilterBarShowSmall;
-		},
-		compare: function(a, b) {
-			let comparison = 0;
-			switch (this.selectedSort) {
-				case "Date":
-					comparison =
-						new Date(a.DateClaimed) >= new Date(b.DateClaimed)
-							? -1
-							: 1;
-					break;
-				case "Activity":
-					comparison = a.Activity <= b.Activity ? -1 : 1;
-					break;
-				case "Product":
-					comparison = a.ProductTitle <= b.ProductTitle ? -1 : 1;
-					break;
-				default:
-					break;
-			}
-
-			return comparison;
-		},
-		creditCounterDecorator: function(credit, count) {
-			var classCode = "bg_" + credit + " c_white";
-			if (count == 1) classCode = classCode + " p-y_4";
-			if (count < 3) classCode = classCode + " font_2";
-			if (count == 3) classCode = classCode + " font_1";
-			if (count == 4) classCode = classCode + " font_0";
-			if (count > 4)
-				classCode =
-					classCode + " w_50 br_solid br_white-5 br_1 font_n1";
-			return classCode;
-		},
-		creditBoolean: function(credit) {
-			var bool =
-				this.selectedCreditFilter.indexOf(credit) != -1 ||
-				this.selectedCreditFilter.length() == 1;
-			return bool;
-		},
-		creditTemp: () => {},
-		isCreditTypeInFilter: function(type) {
-			return this.creditsFilteredList.indexOf(type) !== -1 ? true : false;
-		},
-		isDateInFilter: function(date) {
-			var start, end, activityDate;
-			activityDate = new Date(date);
-			start =
-				new Date(this.filterStartDate) == "invalid date"
-					? new Date("1970-01-01")
-					: new Date(this.filterStartDate);
-			end =
-				this.filterEndDate == ""
-					? new Date()
-					: new Date(this.filterEndDate);
-
-			return start <= activityDate && activityDate <= end ? true : false;
-		}
+		...mapActions([])
 	}
 };
 </script>
 
 <style>
-.viewport {
-	min-height: 100vh;
-	overflow-x: hidden;
-}
-.crossFade-enter-active,
-.crossFade-leave-active {
-	transition: opacity 0.25s ease 0.25s;
-}
-
-.crossFade-leave-to,
-.crossFade-enter {
-	opacity: 0;
-}
-.crossFade-enter-to {
-	opacity: 1;
-}
-.crossFade-move {
-	transition: 0.5s ease;
-}
-.z_0 {
-	z-index: -1;
-}
-.z_1 {
-	z-index: 1;
-}
-.z_5 {
-	z-index: 10000;
-}
-@media only screen and (max-width: 1024px) {
-	.sm_button {
-		padding: 0.35rem 1rem;
-		border-radius: 0.3333333333rem;
-		background-color: #dedee0 !important;
-		color: black !important;
-		display: inline-block;
-	}
-}
-@media print {
-	.print-display_none {
-		display: none !important;
-	}
-	.print-display_block {
-		display: block !important;
-	}
-	.print-display_inline-block {
-		display: inline-block !important;
-	}
-	.print-p_0 {
-		padding: 0 !important;
-	}
-	.print-m_0 {
-		margin: 0 !important;
-	}
-	.print-flex_row {
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
-	.print-flex_row > * {
-		flex: 1 0 auto !important;
-		display: inline-block;
-		padding-right: 0.5rem;
-		padding-left: 0rem;
-	}
-	.print-br_black {
-		border: rgb(73, 73, 73) 1px solid !important;
-	}
-	.print-c_black {
-		color: black !important;
-	}
-	.print-font_0 {
-		font-size: 1rem !important;
-	}
-}
 </style>
-
-function newFunction(element) {
-	console.log(element);
-}
